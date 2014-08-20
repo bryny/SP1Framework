@@ -2,7 +2,6 @@
 //
 //
 #include "game.h"
-#include "objects.h"
 #include "Framework\console.h"
 #include <iostream>
 #include <iomanip>
@@ -15,32 +14,15 @@ COORD charLocation;
 COORD consoleSize;
 
 
-//Objects Declaration
-struct Object //Shannon : Object Struct Draft
-{
-	COORD Location;
-	int State;
-};
-enum ObjectState //Shannon : State of Objects
-{
-	UNCREATED,
-	CREATED,
-	RECYCLED
-};
-Object Apple[10]; //Shannon : [Object]Apples
-Object Bomb; //Shannon : [Object]Bombs
-COORD ObjectStart; //Shannon : Object Starting Location
-int Number = 0; //Shannon : Test
-int timer = 5; //Shannon : Timer - Number of frames per movement
-int timerlimit;
 
+//Objects
 struct System //Shannon : System Struct Draft
 {
 	int Value;
 	COORD Location[3];
 };
 System Life; //Shannon : Life System
-COORD enemyLocation[3]; //Shannon : Dummy Enemies
+COORD enemyLocation[3]; //Shannon : Dummy Enemies//Systems
 
 void init()
 {
@@ -57,15 +39,9 @@ void init()
 
     // set the character to be in the center of the screen.
     charLocation.X = consoleSize.X / 2;
-    charLocation.Y = consoleSize.Y / 2;
+    charLocation.Y = consoleSize.Y / 2;// Mr Sim's
 
-	// Shannon : Implement Objects starting Location
-	for (int i = 0; i < 10; ++i)
-	{
-	Apple[i].State = UNCREATED;
-	}
-	//Shannon : Implement Timer
-	int timerlimit = timer;
+	ImplementObjects();
 
 	//Shannon : Implement Dummy Enemies
 	for (int i = 0; i < 3; ++i)
@@ -101,6 +77,22 @@ void getInput()
     keyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 }
 
+
+
+void UpdateLife()
+{
+	// Shannon : Lose Life on collision with enemy and enemy 'disappears'
+	for (int i = 0; i < 3; ++i)
+	{
+		if (charLocation.X == enemyLocation[i].X && charLocation.Y == enemyLocation[i].Y)
+		{
+			--Life.Value;
+			enemyLocation[i].X = 0;
+			enemyLocation[i].Y = 0;
+		}
+	}
+}
+
 void update(double dt)
 {
     // get the delta time
@@ -130,71 +122,10 @@ void update(double dt)
     }
 	
 	
+	UpdateObjects(charLocation, consoleSize, Life.Value);
 
-
+	UpdateLife();
 	
-	//Shannon timer starts
-	if (timerlimit != 0)
-	{
-		--timerlimit;
-	}
-	//Only works on timer end
-	if (timerlimit == 0)
-	{
-		timer = timerlimit;
-		//Shannon : Objects randomly appear based on starting location
-		if (Number < 10)
-		{
-			ObjectStart.X = rand() % 50;
-			if (Apple[Number].State == UNCREATED)
-			{
-				Apple[Number].Location.X = ObjectStart.X;
-				Apple[Number].Location.Y = 0;
-				Apple[Number].State = CREATED;
-			}
-		}
-		++Number;
-		if (Number == 10)
-		{
-			Number = 0;
-		}
-	//	Shannon : Objects slowly descend to player
-		for (int ii = 0; ii < 10; ++ii)
-		{
-			if (Apple[ii].State == CREATED)
-			{
-				if (Apple[ii].Location.Y < consoleSize.Y - 1)
-				{
-					Apple[ii].Location.Y++ ;
-				}
-			}
-		}
-	}
-	//When objects reach the end or touch the player
-	for (int ii = 0; ii < 10; ++ii)
-	{
-				if (Apple[ii].Location.Y == consoleSize.Y - 1)
-			{
-				Apple[ii].Location.X = ObjectStart.X;
-				Apple[ii].Location.Y = 0;
-			}
-			else if (charLocation.X == Apple[ii].Location.X && charLocation.Y == Apple[ii].Location.Y)
-		{
-			Apple[ii].Location.X = ObjectStart.X;
-			Apple[ii].Location.Y = 0;
-		}
-	}
-
-	// Shannon Touching an enemy results in losing life and removal of enemy
-	for (int i = 0; i < 3; ++i)
-	{
-		if (charLocation.X == enemyLocation[i].X && charLocation.Y == enemyLocation[i].Y)
-		{
-			--Life.Value;
-			enemyLocation[i].X = 0;
-			enemyLocation[i].Y = 0;
-		}
-	}
 
     // quits the game if player hits the escape key
     if (keyPressed[K_ESCAPE])
@@ -239,13 +170,7 @@ void render()
 
 
 
-   	// Shannon : Render objects
-	for (int i = 0; i < 10; ++i)
-	{
-		gotoXY(Apple[i].Location);
-		colour(0x0C);
-		std::cout << (char)65+i;
-	}
+   	RenderObjects();
 
 	// Shannon : Render Enemy
 	for (int i = 0; i < 3; ++i)
