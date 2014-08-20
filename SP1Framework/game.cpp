@@ -32,7 +32,8 @@ COORD charLocation;
 COORD consoleSize;
 COORD enemyLocation[3]; //Shannon : Dummy Enemies
 COORD ObjectStart; //Shannon : Object Starting Location
-int Number; //Shannon Test
+int Number; //Shannon : Test
+int timer; //Shannon : A timer for when objects move
 
 void init()
 {
@@ -72,6 +73,8 @@ void init()
 	Apple[i].State = UNCREATED;
 	}
 	int Number = 0;
+	// Shannon : Implement Object timer countdown
+	int timer = 5;
 
     elapsedTime = 0.0;
 }
@@ -118,7 +121,8 @@ void update(double dt)
         Beep(1440, 30);
         charLocation.X++; 
     }
-
+	
+	
 	// Shannon Touching an enemy results in losing life and removal of enemy
 	for (int i = 0; i < 3; ++i)
 	{
@@ -129,47 +133,63 @@ void update(double dt)
 			enemyLocation[i].Y = 0;
 		}
 	}
-
-	//Shannon : Objects randomly appear based on starting location
-	if (Number < 10)
+		//Shannon timer decrease
+	if (timer != 0)
 	{
-		ObjectStart.X = rand() % 50;
-		if (Apple[Number].State == UNCREATED)
-		{
-			Apple[Number].Location.X = ObjectStart.X;
-			Apple[Number].Location.Y = 0;
-			Apple[Number].State = CREATED;
-		}
+		--timer;
 	}
-	++Number;
-	if (Number == 10)
+	//Only works on timer
+	else if (timer == 0)
 	{
-		Number = 0;
-	}
-	//	Shannon : Objects slowly descend to player
-	for (int ii = 0; ii < 10; ++ii)
-	{
-		if (Apple[ii].State == CREATED)
+		timer = 5;
+		//Shannon : Objects randomly appear based on starting location
+		if (Number < 10)
 		{
-			if (Apple[ii].Location.Y < consoleSize.Y - 1)
+			ObjectStart.X = rand() % 50;
+			if (Apple[Number].State == UNCREATED)
 			{
-				Apple[ii].Location.Y++ ;
+				Apple[Number].Location.X = ObjectStart.X;
+				Apple[Number].Location.Y = 0;
+				Apple[Number].State = CREATED;
 			}
 		}
-		//When objects reach the end or touch the player
-		if (Apple[ii].Location.Y == consoleSize.Y - 1)
+		++Number;
+		if (Number == 10)
 		{
-			Apple[ii].Location.X = ObjectStart.X;
-			Apple[ii].Location.Y = 0;
+			Number = 0;
 		}
-		else if (charLocation.X == Apple[ii].Location.X && charLocation.Y == Apple[ii].Location.Y)
-		{
-			Apple[ii].Location.X = ObjectStart.X;
-			Apple[ii].Location.Y = 0;
-		}
+	
 
+	
+	//	Shannon : Objects slowly descend to player
+		for (int ii = 0; ii < 10; ++ii)
+		{
+			if (Apple[ii].State == CREATED)
+			{
+				if (Apple[ii].Location.Y < consoleSize.Y - 1)
+				{
+					Apple[ii].Location.Y++ ;
+				}
+			}
+			
+
+
+		}
 	}
-
+	//When objects reach the end or touch the player
+	for (int ii = 0; ii < 10; ++ii)
+	{
+				if (Apple[ii].Location.Y == consoleSize.Y - 1)
+			{
+				Apple[ii].Location.X = ObjectStart.X;
+				Apple[ii].Location.Y = 0;
+			}
+			else if (charLocation.X == Apple[ii].Location.X && charLocation.Y == Apple[ii].Location.Y)
+		{
+			Apple[ii].Location.X = ObjectStart.X;
+			Apple[ii].Location.Y = 0;
+		}
+	}
     // quits the game if player hits the escape key
     if (keyPressed[K_ESCAPE])
         g_quitGame = true;    
@@ -234,6 +254,6 @@ void render()
 	{
 		gotoXY(Apple[i].Location);
 		colour(0x0C);
-		std::cout << (char)1;
+		std::cout << (char)65+i;
 	}
 }
