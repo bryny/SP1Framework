@@ -14,7 +14,6 @@ COORD charLocation;
 COORD consoleSize;
 
 //Shannon : Jump function
-int jump = 0;
 int jumptime = 0;
 
 //Objects
@@ -102,12 +101,11 @@ void update(double dt)
     deltaTime = dt;
 
     // Updating the location of the character based on the key press
-    if (keyPressed[K_UP] && charLocation.Y > 0 && jump == 0)
+    if (keyPressed[K_UP] && charLocation.Y > 0 && jumptime == 0)
     {
 		 Beep(1440, 30);
 		 charLocation.Y--; 
 		 jumptime += 20;
-		 jump +=2;
     }
     if (keyPressed[K_LEFT] && charLocation.X > 0)
     {
@@ -139,7 +137,6 @@ void update(double dt)
 	}
 	if (jumptime == 1)
 	{
-		jump = 0;
 		charLocation.Y++;
 	}
     // quits the game if player hits the escape key
