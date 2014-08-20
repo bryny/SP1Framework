@@ -11,13 +11,28 @@ struct System //Shannon : Struct Draft
 	int Value;
 	COORD Location[3];
 };
+struct Object //Shannon : Object Struct Draft
+{
+	COORD Location;
+	int State;
+};
+enum ObjectState //Shannon : State of Objects
+{
+	UNCREATED,
+	CREATED,
+	RECYCLED
+};
 System Life; //Shannon : Life System
+Object Apple[10]; //Shannon : Apples
+Object Bomb; //Shannon : Bombs
 double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
 COORD charLocation;
-COORD enemyLocation[3]; //Shannon : Dummy Enemies
 COORD consoleSize;
+COORD enemyLocation[3]; //Shannon : Dummy Enemies
+COORD ObjectStart; //Shannon : Object Starting Location
+int Number; //Shannon Test
 
 void init()
 {
@@ -50,6 +65,13 @@ void init()
 		Life.Location[i].X = consoleSize.X - 2*(i+1);
 		Life.Location[i].Y = consoleSize.Y - 20;
 	}
+
+	// Shannon : Implement Objects starting Location
+	for (int i = 0; i < 10; ++i)
+	{
+	Apple[i].State = UNCREATED;
+	}
+	int Number = 0;
 
     elapsedTime = 0.0;
 }
@@ -106,6 +128,46 @@ void update(double dt)
 			enemyLocation[i].X = 0;
 			enemyLocation[i].Y = 0;
 		}
+	}
+
+	//Shannon : Objects randomly appear based on starting location
+	if (Number < 10)
+	{
+		ObjectStart.X = rand() % 50;
+		if (Apple[Number].State == UNCREATED)
+		{
+			Apple[Number].Location.X = ObjectStart.X;
+			Apple[Number].Location.Y = 0;
+			Apple[Number].State = CREATED;
+		}
+	}
+	++Number;
+	if (Number == 10)
+	{
+		Number = 0;
+	}
+	//	Shannon : Objects slowly descend to player
+	for (int ii = 0; ii < 10; ++ii)
+	{
+		if (Apple[ii].State == CREATED)
+		{
+			if (Apple[ii].Location.Y < consoleSize.Y - 1)
+			{
+				Apple[ii].Location.Y++ ;
+			}
+		}
+		//When objects reach the end or touch the player
+		if (Apple[ii].Location.Y == consoleSize.Y - 1)
+		{
+			Apple[ii].Location.X = ObjectStart.X;
+			Apple[ii].Location.Y = 0;
+		}
+		else if (charLocation.X == Apple[ii].Location.X && charLocation.Y == Apple[ii].Location.Y)
+		{
+			Apple[ii].Location.X = ObjectStart.X;
+			Apple[ii].Location.Y = 0;
+		}
+
 	}
 
     // quits the game if player hits the escape key
@@ -167,5 +229,11 @@ void render()
 		}
 	}
 
-    
+    	// render objects
+	for (int i = 0; i < 10; ++i)
+	{
+		gotoXY(Apple[i].Location);
+		colour(0x0C);
+		std::cout << (char)1;
+	}
 }
