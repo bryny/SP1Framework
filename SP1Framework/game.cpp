@@ -6,10 +6,17 @@
 #include <iostream>
 #include <iomanip>
 
+struct System //Shannon : Struct Draft
+{
+	int Value;
+	COORD Location[3];
+};
+System Life; //Shannon : Life System
 double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
 COORD charLocation;
+COORD enemyLocation[3]; //Shannon : Dummy Enemies
 COORD consoleSize;
 
 void init()
@@ -28,6 +35,21 @@ void init()
     // set the character to be in the center of the screen.
     charLocation.X = consoleSize.X / 2;
     charLocation.Y = consoleSize.Y / 2;
+
+	//Shannon : Implement Dummy Enemies
+	for (int i = 0; i < 3; ++i)
+	{
+		enemyLocation[i].X = consoleSize.X - 2*(i+1);
+		enemyLocation[i].Y = consoleSize.Y - 2*(i+1);
+	}
+
+	//Shannon : Implement Life System
+	Life.Value = 3;
+	for (int i = 0; i < 3; ++i)
+	{
+		Life.Location[i].X = consoleSize.X - 2*(i+1);
+		Life.Location[i].Y = consoleSize.Y - 20;
+	}
 
     elapsedTime = 0.0;
 }
@@ -75,6 +97,17 @@ void update(double dt)
         charLocation.X++; 
     }
 
+	// Shannon Touching an enemy results in losing life and removal of enemy
+	for (int i = 0; i < 3; ++i)
+	{
+		if (charLocation.X == enemyLocation[i].X && charLocation.Y == enemyLocation[i].Y)
+		{
+			--Life.Value;
+			enemyLocation[i].X = 0;
+			enemyLocation[i].Y = 0;
+		}
+	}
+
     // quits the game if player hits the escape key
     if (keyPressed[K_ESCAPE])
         g_quitGame = true;    
@@ -114,6 +147,25 @@ void render()
     gotoXY(charLocation);
     colour(0x0C);
     std::cout << (char)1;
+
+	// Shannon : Render Enemy
+	for (int i = 0; i < 3; ++i)
+	{
+			gotoXY(enemyLocation[i]);
+			colour(0x1A);
+			std::cout <<(char)1;
+	}
+
+	// Shannon : Render Life System
+	for (int i = 0; i < 3; ++i)
+	{
+		if (Life.Value > i)
+		{
+			gotoXY(Life.Location[i]);
+			colour(0x0C);
+			std::cout <<(char)1;
+		}
+	}
 
     
 }
