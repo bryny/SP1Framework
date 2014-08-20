@@ -132,3 +132,37 @@ void RenderObjects()
 		}
 	}
 }
+
+unsigned long long score;
+
+void displayscore()
+{
+	if(score == 1000000000 || score > 1000000000)
+	{
+		gotoXY(32, 10);
+		colour(0x0C);
+		std::cout << "Congratulations";
+		gotoXY(36, 11);
+		colour(0x0C);
+		std::cout << "You Won";
+	}
+	else if (Life.Value != 0)
+	{
+		gotoXY(70,2);
+		colour(0x1A);
+		std::cout << "highscore:";
+		gotoXY(70,3);
+		colour(0x1A);
+		std::cout << score;
+	}
+	else if(Life.Value == 0)
+	{
+		gotoXY(35, 10);
+		colour(0x0C);
+		std::cout << "GAME OVER";
+		gotoXY(32, 11);
+		colour(0x0C);
+		std::cout << "Your score is "<< score;
+	}
+
+}
