@@ -7,7 +7,7 @@
 
 Type Object[10]; //Shannon : Type - Object[MaxNumber]
 int Number = 0; //Shannon : Test
-int timer = 25; //Shannon : Timer - Number of frames per object movement
+int timer = 10; //Shannon : Timer - Number of frames per object movement
 int idtype;
 int timerlimit;
 COORD ObjectStart;
@@ -54,7 +54,7 @@ void UpdateObjects()
 				Object[Number].Location.Y = 0;
 				Object[Number].State = CREATED;
 				//Shannon : Define Object
-				if (idtype <= 5)
+				if (idtype <= 8)
 				{
 					Object[Number].id = APPLE;
 				}
@@ -86,7 +86,13 @@ void UpdateObjects()
 	{
 		if (Object[ii].Location.Y == consoleSize.Y - 1)
 		{
+			//Bonus Level
+			if (Object[ii].id == APPLE && Object[ii].State == CREATED && MiniLevel == 4)
+			{
+				LevelCounter += 1;
+			}
 			Object[ii].State = UNCREATED;
+			
 		}
 		//Shannon : How objects affect the player when collision happens
 		if (Object[ii].State == CREATED && charLocation.X == Object[ii].Location.X && charLocation.Y == Object[ii].Location.Y)
@@ -95,10 +101,7 @@ void UpdateObjects()
 			if (Object[ii].id == APPLE)
 			{
 				score += 100;
-				if (MiniLevel <= 3)
-				{
-					LevelCounter += 1;
-				}
+				LevelCounter += 1;
 			}
 			if (Object[ii].id == BOMB)
 			{

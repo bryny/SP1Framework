@@ -28,6 +28,7 @@ enum ObjectType //Type of Object
 extern Type Object[10]; //Shannon : Type - Object[MaxNumber]
 extern COORD ObjectStart; //Shannon : Object Starting Location
 extern int timerlimit;
+extern int timer;
 extern int idtype;
 
 //Shannon : The Rat

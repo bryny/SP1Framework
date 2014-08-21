@@ -87,6 +87,14 @@ void UpdateLevel()
 		MiniLevel += 1;
 		LevelCounter = 0;
 	}
+	//Increase from 'Bonus' to Next Main Level
+	if (MiniLevel == 4 && LevelCounter >= 2)
+	{
+		timer -= 5;
+		Level += 1;
+		MiniLevel = 1;
+		LevelCounter = 0;
+	}
 }
 
 
