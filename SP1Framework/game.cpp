@@ -2,6 +2,8 @@
 //
 //
 #include "game.h"
+#include "objects.h"
+#include "systems.h"
 #include "Framework\console.h"
 #include <iostream>
 #include <iomanip>
@@ -17,13 +19,6 @@ COORD consoleSize;
 int jumptime = 0;
 
 //Objects
-struct System //Shannon : System Struct Draft
-{
-	int Value;
-	COORD Location[3];
-};
-System Life; //Shannon : Life System
-COORD enemyLocation[3]; //Shannon : Dummy Enemies//Systems
 
 void init()
 {
@@ -44,20 +39,7 @@ void init()
 
 	ImplementObjects();
 
-	//Shannon : Implement Dummy Enemies
-	for (int i = 0; i < 3; ++i)
-	{
-		enemyLocation[i].X = consoleSize.X - 2*(i+1);
-		enemyLocation[i].Y = consoleSize.Y - 2*(i+1);
-	}
-
-	//Shannon : Implement Life System
-	Life.Value = 3;
-	for (int i = 0; i < 3; ++i)
-	{
-		Life.Location[i].X = consoleSize.X - 2*(i+1);
-		Life.Location[i].Y = consoleSize.Y - 20;
-	}
+	ImplementLife();
 
 
     elapsedTime = 0.0;
@@ -76,22 +58,6 @@ void getInput()
     keyPressed[K_LEFT] = isKeyPressed(VK_LEFT);
     keyPressed[K_RIGHT] = isKeyPressed(VK_RIGHT);
     keyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
-}
-
-
-
-void UpdateLife()
-{
-	// Shannon : Lose Life on collision with enemy and enemy 'disappears'
-	for (int i = 0; i < 3; ++i)
-	{
-		if (charLocation.X == enemyLocation[i].X && charLocation.Y == enemyLocation[i].Y)
-		{
-			--Life.Value;
-			enemyLocation[i].X = 0;
-			enemyLocation[i].Y = 0;
-		}
-	}
 }
 
 void update(double dt)
@@ -126,9 +92,7 @@ void update(double dt)
     }
 	
 	
-	UpdateObjects(charLocation, consoleSize, Life.Value);
-
-	UpdateLife();
+	UpdateObjects();
 	
 	//Player will descend after time
 	if (jumptime > 0)
@@ -180,28 +144,11 @@ void render()
     std::cout << (char)1;
 
 
-
+	displayscore();
 
    	RenderObjects();
 
-	// Shannon : Render Enemy
-	for (int i = 0; i < 3; ++i)
-	{
-			gotoXY(enemyLocation[i]);
-			colour(0x1A);
-			std::cout <<(char)1;
-	}
-
-	// Shannon : Render Life System
-	for (int i = 0; i < 3; ++i)
-	{
-		if (Life.Value > i)
-		{
-			gotoXY(Life.Location[i]);
-			colour(0x0C);
-			std::cout <<(char)1;
-		}
-	}
+	RenderLife();
 
 
 }

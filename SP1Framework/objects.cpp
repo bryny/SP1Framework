@@ -1,46 +1,28 @@
 #include "game.h"
+#include "objects.h"
+#include "systems.h"
 #include "Framework\console.h"
 #include <iostream>
 #include <iomanip>
 
-
-//Objects Declaration
-struct Type //Shannon : Object Struct Draft
-{
-	COORD Location;
-	int State;
-	int id;
-};
-enum ObjectState //Shannon : State of Objects
-{
-	UNCREATED,
-	CREATED,
-	RECYCLED
-};
-enum ObjectType //Type of Object
-{
-	APPLE,
-	BOMB
-};
-Type Objects[10]; //Shannon : Object - Objects[MaxNumber]
-COORD ObjectStart; //Shannon : Object Starting Location
+Type Object[10]; //Shannon : Type - Object[MaxNumber]
 int Number = 0; //Shannon : Test
 int timer = 20; //Shannon : Timer - Number of frames per object movement
-int timerlimit;
 int idtype;
-
+int timerlimit;
+COORD ObjectStart;
 void ImplementObjects()
 {
 	// Shannon : Implement Objects
 	for (int i = 0; i < 10; ++i)
 	{
-	Objects[i].State = UNCREATED;
+	Object[i].State = UNCREATED;
 	}
 	//Shannon : Implement Timer
 	int timerlimit = timer;
 }
 
-void UpdateObjects(COORD charLocation, COORD consoleSize, int& Life)
+void UpdateObjects()
 {
 	//Shannon : Timer starts
 	if (timerlimit != 0)
@@ -56,19 +38,19 @@ void UpdateObjects(COORD charLocation, COORD consoleSize, int& Life)
 		{
 			ObjectStart.X = rand() % 50;
 			idtype = rand() % 10 + 1;
-			if (Objects[Number].State == UNCREATED)
+			if (Object[Number].State == UNCREATED)
 			{
-				Objects[Number].Location.X = ObjectStart.X;
-				Objects[Number].Location.Y = 0;
-				Objects[Number].State = CREATED;
+				Object[Number].Location.X = ObjectStart.X;
+				Object[Number].Location.Y = 0;
+				Object[Number].State = CREATED;
 				//Shannon : Define Object
 				if (idtype <= 5)
 				{
-					Objects[Number].id = APPLE;
+					Object[Number].id = APPLE;
 				}
 				else
 				{
-					Objects[Number].id = BOMB;
+					Object[Number].id = BOMB;
 				}
 			}
 		}
@@ -80,11 +62,11 @@ void UpdateObjects(COORD charLocation, COORD consoleSize, int& Life)
 	//	Shannon : Objects slowly descend to player
 		for (int ii = 0; ii < 10; ++ii)
 		{
-			if (Objects[ii].State == CREATED)
+			if (Object[ii].State == CREATED)
 			{
-				if (Objects[ii].Location.Y < consoleSize.Y - 1)
+				if (Object[ii].Location.Y < consoleSize.Y - 1)
 				{
-					Objects[ii].Location.Y++ ;
+					Object[ii].Location.Y++ ;
 				}
 			}
 		}
@@ -92,20 +74,21 @@ void UpdateObjects(COORD charLocation, COORD consoleSize, int& Life)
 	// Shannon : Objects are 'recycled' after touching player or bottom of screen
 	for (int ii = 0; ii < 10; ++ii)
 	{
-		if (Objects[ii].Location.Y == consoleSize.Y - 1)
+		if (Object[ii].Location.Y == consoleSize.Y - 1)
 		{
-			Objects[ii].State = UNCREATED;
+			Object[ii].State = UNCREATED;
 		}
-		if (Objects[ii].State == CREATED && charLocation.X == Objects[ii].Location.X && charLocation.Y == Objects[ii].Location.Y)
+		//Shannon : How objects affect the player when collision happens
+		if (Object[ii].State == CREATED && charLocation.X == Object[ii].Location.X && charLocation.Y == Object[ii].Location.Y)
 		{
-			Objects[ii].State = UNCREATED;
-			if (Objects[ii].id == APPLE)
+			Object[ii].State = UNCREATED;
+			if (Object[ii].id == APPLE)
 			{
-				//+points
+				score += 10;
 			}
-			if (Objects[ii].id == BOMB)
+			if (Object[ii].id == BOMB)
 			{
-				--Life;
+				--Life.Value;
 			}
 		}
 	}
@@ -116,15 +99,15 @@ void RenderObjects()
 	// Shannon : Render objects if created
 	for (int i = 0; i < 10; ++i)
 	{
-		if (Objects[i].State == CREATED)
+		if (Object[i].State == CREATED)
 		{
-			gotoXY(Objects[i].Location);
-			if (Objects[i].id == APPLE)
+			gotoXY(Object[i].Location);
+			if (Object[i].id == APPLE)
 			{
 				colour(0x0C);
 				std::cout << (char)65;
 			}
-			else if (Objects[i].id == BOMB)
+			else if (Object[i].id == BOMB)
 			{
 				colour(0x59);
 				std::cout << (char)66;
@@ -133,36 +116,6 @@ void RenderObjects()
 	}
 }
 
-unsigned long long score;
 
-void displayscore()
-{
-	if(score == 1000000000 || score > 1000000000)
-	{
-		gotoXY(32, 10);
-		colour(0x0C);
-		std::cout << "Congratulations";
-		gotoXY(36, 11);
-		colour(0x0C);
-		std::cout << "You Won";
-	}
-	else if (Life.Value != 0)
-	{
-		gotoXY(70,2);
-		colour(0x1A);
-		std::cout << "highscore:";
-		gotoXY(70,3);
-		colour(0x1A);
-		std::cout << score;
-	}
-	else if(Life.Value == 0)
-	{
-		gotoXY(35, 10);
-		colour(0x0C);
-		std::cout << "GAME OVER";
-		gotoXY(32, 11);
-		colour(0x0C);
-		std::cout << "Your score is "<< score;
-	}
 
-}
+
