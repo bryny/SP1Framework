@@ -69,3 +69,44 @@ void displayscore()
 	}
 
 }
+
+
+//Level System
+
+//Shannon : Implement Main Level and Mini Level
+int Level = 1;
+int MiniLevel = 1;
+int LevelCounter = 0;
+
+//Shannon : Increase Level at certain requirements
+void UpdateLevel()
+{
+	//When level up, update level, reset counter
+	if (MiniLevel <= 3 && LevelCounter == 2)
+	{
+		MiniLevel += 1;
+		LevelCounter = 0;
+	}
+}
+
+
+
+//Shannon : Display the level
+void RenderLevel() 
+{
+	if (MiniLevel <= 3)
+	{
+		gotoXY(75,10);
+		colour(0x0C);
+		std::cout << Level << '-' << MiniLevel;
+	}
+	if (MiniLevel == 4)
+	{
+		gotoXY(75,10);
+		colour(0x0C);
+		std::cout << "Bonus";
+		gotoXY(75,11);
+		colour(0x0C);
+		std::cout << "Level";
+	}
+}
