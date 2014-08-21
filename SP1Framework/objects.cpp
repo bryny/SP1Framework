@@ -7,10 +7,15 @@
 
 Type Object[10]; //Shannon : Type - Object[MaxNumber]
 int Number = 0; //Shannon : Test
-int timer = 20; //Shannon : Timer - Number of frames per object movement
+int timer = 25; //Shannon : Timer - Number of frames per object movement
 int idtype;
 int timerlimit;
 COORD ObjectStart;
+
+//Shannon : The Rat
+Type Rat;
+int RatChance;
+
 void ImplementObjects()
 {
 	// Shannon : Implement Objects
@@ -20,6 +25,11 @@ void ImplementObjects()
 	}
 	//Shannon : Implement Timer
 	int timerlimit = timer;
+
+	// Shannon : Implement Rat
+	Rat.State = UNCREATED;
+	Rat.Location.Y = charLocation.Y;
+	Rat.Location.X = 0;
 }
 
 void UpdateObjects()
@@ -84,13 +94,51 @@ void UpdateObjects()
 			Object[ii].State = UNCREATED;
 			if (Object[ii].id == APPLE)
 			{
-				score += 10;
+				score += 100;
+				if (MiniLevel <= 3)
+				{
+					LevelCounter += 1;
+				}
 			}
 			if (Object[ii].id == BOMB)
 			{
 				--Life.Value;
 			}
 		}
+	}
+}
+
+void UpdateRat()
+{
+	//Shannon : If Rat is uncreated, it has a chance to spawn
+	RatChance = rand() % 50 + 1;
+	if (Rat.State == UNCREATED)
+	{
+		if (RatChance <= 5)
+		{
+			Rat.State = CREATED;
+		}
+	}
+	//Shannon : If Rat is created, it will move to the other side of the screen
+	if (Rat.State == CREATED && Rat.Location.X != consoleSize.X - 1)
+	{
+		Rat.Location.X++;
+	}
+	//Shannon : If the Rat touches the player, lose score and Rat disappears
+	if (Rat.State == CREATED && charLocation.X == Rat.Location.X && charLocation.Y == Rat.Location.Y)
+	{
+			Rat.State = UNCREATED;
+			Rat.Location.X = 0;
+			if (score >= 20)
+			{
+				score -= 20;
+			}
+	}
+	//Shannon : When it reaches the other side, it disappears
+	if (Rat.Location.X == consoleSize.X - 1)
+	{
+		Rat.State = UNCREATED;
+		Rat.Location.X = 0;
 	}
 }
 
@@ -113,6 +161,13 @@ void RenderObjects()
 				std::cout << (char)66;
 			}
 		}
+	}
+	// Shannon : Render Rat if created
+	if (Rat.State == CREATED)
+	{
+		gotoXY(Rat.Location);
+		colour(0x0C);
+		std::cout <<(char)75;
 	}
 }
 

@@ -30,6 +30,8 @@ extern COORD ObjectStart; //Shannon : Object Starting Location
 extern int timerlimit;
 extern int idtype;
 
+//Shannon : The Rat
+void UpdateRat();
 
 //Object Functions Declaration
 void ImplementObjects();

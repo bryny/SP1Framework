@@ -93,6 +93,10 @@ void update(double dt)
 	
 	
 	UpdateObjects();
+
+	UpdateRat();
+
+	UpdateLevel();
 	
 	//Player will descend after time
 	if (jumptime > 0)
@@ -150,5 +154,5 @@ void render()
 
 	RenderLife();
 
-
+	RenderLevel();
 }

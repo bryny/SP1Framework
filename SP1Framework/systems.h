@@ -21,4 +21,11 @@ void RenderLife();
 extern unsigned long long score;
 void displayscore();
 
+//Level System
+extern int LevelCounter;
+extern int MiniLevel;
+void UpdateLevel();
+void RenderLevel();
+
+
 #endif // _SYSTEMS_H
