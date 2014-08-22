@@ -66,7 +66,10 @@ void update(double dt)
     elapsedTime += dt;
     deltaTime = dt;
 
-    // Updating the location of the character based on the key press
+	//Shannon : If the player has 0 lives, game stops
+	if (Life.Value > 0)
+	{
+	// Updating the location of the character based on the key press
     if (keyPressed[K_UP] && charLocation.Y > 0 && jumptime == 0)
     {
 		 Beep(1440, 30);
@@ -106,6 +109,7 @@ void update(double dt)
 	if (jumptime == 1)
 	{
 		charLocation.Y++;
+	}
 	}
     // quits the game if player hits the escape key
     if (keyPressed[K_ESCAPE])
