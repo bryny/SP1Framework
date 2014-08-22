@@ -98,9 +98,9 @@ void UpdateObjects()
 		if (Object[ii].State == CREATED && charLocation.X == Object[ii].Location.X && charLocation.Y == Object[ii].Location.Y)
 		{
 			Object[ii].State = UNCREATED;
-			if (Object[ii].id == APPLE)
+			if (Object[ii].id == APPLE && Life.Value > 0)
 			{
-				score += 100;
+				score += 200;
 				LevelCounter += 1;
 			}
 			if (Object[ii].id == BOMB)
@@ -132,9 +132,9 @@ void UpdateRat()
 	{
 			Rat.State = UNCREATED;
 			Rat.Location.X = 0;
-			if (score >= 20)
+			if (score > 0)
 			{
-				score -= 20;
+				score -= 100;
 			}
 	}
 	//Shannon : When it reaches the other side, it disappears

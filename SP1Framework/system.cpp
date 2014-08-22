@@ -84,8 +84,16 @@ void UpdateLevel()
 	//When level up, update level, reset counter
 	if (MiniLevel <= 3 && LevelCounter == 2)
 	{
+		if(Life.Value == 0)
+		{
+			MiniLevel == MiniLevel;
+			LevelCounter == LevelCounter;
+		}
+		else
+		{
 		MiniLevel += 1;
 		LevelCounter = 0;
+		}
 	}
 	//Increase from 'Bonus' to Next Main Level
 	if (MiniLevel == 4 && LevelCounter >= 2)
