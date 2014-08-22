@@ -116,12 +116,17 @@ void update(double dt)
         charLocation.X++; 
     }
 	
+	
+	//Shannon : Updates the level based on LevelCounter
+	UpdateLevel();
+
+	//Yi Yang : Updates the level difficulty base on difficultyEnum and Level
+	updateDifficulty();
+
 	//Shannon : Updates the objects & rats for coordinates and collision detection
 	UpdateObjects();
 	UpdateRat();
 
-	//Shannon : Updates the level based on LevelCounter
-	UpdateLevel();
 
 	} //Shannon : End of Life Detection
 

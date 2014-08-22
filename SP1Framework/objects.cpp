@@ -32,6 +32,13 @@ void ImplementObjects()
 	Rat.Location.X = 0;
 }
 
+//Yi Yang: These values should not be Enum constant.
+//		   The appleChance value will decrease and the
+//		   bombChance value will increase as the level
+//		   increases, so I changed them to int instead.
+//         (otherwise a constant value cannot be modified)
+int randomizer, appleChance, bombChance, cherryChance, bananaChance, coconutChance, pearChance, pineappleChance, fallSpeed;
+
 void UpdateObjects()
 {
 	//Shannon : Timer slowly countsdown
@@ -47,7 +54,7 @@ void UpdateObjects()
 		if (Number < 10)
 		{
 			ObjectStart.X = rand() % 50; //Shannon : Sets the X-coordinate of Object
-			ObjectChance = rand() % RANDOMIZER + 1; //Shannon : Sets the randomizer for objects
+			ObjectChance = rand() % randomizer + 1; //Shannon : Sets the randomizer for objects
 			if (Object[Number].State == UNCREATED)
 			{
 				Object[Number].Location.X = ObjectStart.X;
@@ -55,31 +62,31 @@ void UpdateObjects()
 				Object[Number].State = CREATED;
 
 				//Shannon : Define Objects based on ObjectChance
-				if (ObjectChance <= APPLECHANCE)
+				if (ObjectChance <= appleChance)
 				{
 					Object[Number].id = APPLE;
 				}
-				else if (ObjectChance <= APPLECHANCE + BOMBCHANCE)
+				else if (ObjectChance <= appleChance + bombChance)
 				{
 					Object[Number].id = BOMB;
 				}
-				else if (ObjectChance < APPLECHANCE + BOMBCHANCE + CHERRYCHANCE)
+				else if (ObjectChance < appleChance + bombChance + cherryChance)
 				{
 					Object[Number].id = CHERRY;
 				}
-				else if (ObjectChance < APPLECHANCE + BOMBCHANCE + CHERRYCHANCE + BANANACHANCE)
+				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance)
 				{
 					Object[Number].id = BANANA;
 				}
-				else if (ObjectChance < APPLECHANCE + BOMBCHANCE + CHERRYCHANCE + BANANACHANCE + COCONUTCHANCE)
+				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + coconutChance)
 				{
 					Object[Number].id = COCONUT;
 				}
-				else if (ObjectChance < APPLECHANCE + BOMBCHANCE + CHERRYCHANCE + BANANACHANCE + COCONUTCHANCE + PEARCHANCE)
+				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + coconutChance + pearChance)
 				{
 					Object[Number].id = PEAR;
 				}
-				else if (ObjectChance < APPLECHANCE + BOMBCHANCE + CHERRYCHANCE + BANANACHANCE + COCONUTCHANCE + PEARCHANCE + PINEAPPLECHANCE)
+				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + coconutChance + pearChance + pineappleChance)
 				{
 					Object[Number].id = PINEAPPLE;
 				}
@@ -97,14 +104,7 @@ void UpdateObjects()
 			{
 				if (Object[ii].Location.Y < consoleSize.Y - 1)
 				{
-					Object[ii].Location.Y++ ;
-				}
-			}
-			else
-			{
-				if (Object[ii].State == CREATED)
-				{
-					Object[ii].Location.Y=Object[ii].Location.Y ;
+					Object[ii].Location.Y += fallSpeed;
 				}
 			}
 		}

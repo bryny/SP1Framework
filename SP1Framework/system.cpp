@@ -84,16 +84,121 @@ void UpdateLevel()
 	//Shannon : On level up, update level, reset counter
 	if (MiniLevel <= 3 && LevelCounter == 2)
 	{
-		MiniLevel += 1;
-		LevelCounter = 0;
+		//Level 1
+		if (Level == 1)
+		{
+			switch (MiniLevel)
+			{
+			case 1:
+				//Condition
+				//if (...)
+				//{
+					++MiniLevel;
+					LevelCounter = 0;
+				//}
+				break;
+			case 2:
+				//Condition
+				//if (...)
+				//{
+					++MiniLevel;
+					LevelCounter = 0;
+				//}
+				break;
+			}
+		} //Level 1 End
+
+		//Level 2
+		if (Level == 2)
+		{
+			switch (MiniLevel)
+			{
+			case 1:
+				//Condition
+				//if (...)
+				//{
+					++MiniLevel;
+					LevelCounter = 0;
+				//}
+				break;
+			case 2:
+				//Condition
+				//if (...)
+				//{
+					++MiniLevel;
+					LevelCounter = 0;
+				//}
+				break;
+			}
+		} //Level 2 End
+
+		//End so on...
 	}
 	//Shannon : Transition from 'Bonus' to next Main Level
-	if (MiniLevel == 4 && LevelCounter >= 2)
+	if (MiniLevel > 3 && LevelCounter >= 2)
 	{
 		timer -= 5;
-		Level += 1;
+		++Level;
 		MiniLevel = 1;
 		LevelCounter = 0;
+	}
+}
+
+//Yi Yang : Update Difficulty
+Difficulty levelDifficulty;
+void updateDifficulty()
+{
+	//Yi Yang : Set Level's Difficulty
+	switch (Level)
+	{
+	case 1:
+		levelDifficulty = EASY;
+		break;
+	case 2:
+		if (MiniLevel == 1)
+			levelDifficulty = EASY;
+		else
+			levelDifficulty = MEDIUM;
+		break;
+	case 3:
+		if (MiniLevel == 1)
+			levelDifficulty = MEDIUM;
+		else
+			levelDifficulty = HARD;
+		break;
+	}
+	
+	//Set the actual Difficulty by modifying these values below
+	randomizer = 100; //this will always be 100
+	if (levelDifficulty == EASY)
+	{
+		appleChance = 80;
+		bombChance = 20;
+		fallSpeed = 1;
+	}
+	else if (levelDifficulty == MEDIUM)
+	{
+		appleChance = 70;
+		bombChance = 30;
+		fallSpeed = 1;
+	}
+	else if (levelDifficulty == HARD)
+	{
+		appleChance = 60;
+		bombChance = 40;
+		fallSpeed = 2;
+	}
+	else if (levelDifficulty == INSANE)
+	{
+		appleChance = 55;
+		bombChance = 45;
+		fallSpeed = 2;
+	}
+	else if (levelDifficulty == GODLIKE)
+	{
+		appleChance = 50;
+		bombChance = 50;
+		fallSpeed = 2;
 	}
 }
 

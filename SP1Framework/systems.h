@@ -27,5 +27,17 @@ extern int MiniLevel;
 void UpdateLevel();
 void RenderLevel();
 
+//Yi Yang: Level System
+enum Difficulty 
+{
+	EASY,
+	MEDIUM,
+	HARD,
+	INSANE, //Placeholder in case we want to add more levels
+	GODLIKE //Placeholder in case we want to add more levels
+};
+extern Difficulty levelDifficulty; //Yi Yang : Create a difficulty variable for our game
+void updateDifficulty(); //Yi Yang : Update Difficulty
+
 
 #endif // _SYSTEMS_H

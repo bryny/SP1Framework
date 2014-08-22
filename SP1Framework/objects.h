@@ -30,18 +30,22 @@ enum ObjectType //Shannon : Type of Object
 	PEAR, // SCORE = 750, RARE
 	PINEAPPLE //SCORE = 1000, VERY RARE
 };
-enum ObjectDropRate //Shannon : Sets chance at which different objects drop
-{
-	//Shannon : NOTE - Sum of chance HAS TO EQUAL Randomizer
-	RANDOMIZER = 100, //Shannon : Sets the random value for Object Chance as 1 ~ RANDOMIZER (e.g. 1~100)
-	APPLECHANCE = 40, //Shannon : Chance of Apple appearing = APPLECHANCE/RANDOMIZER
-	BOMBCHANCE = 15, //Shannon : Chance of Bomb appearing = BOMBCHANCE/RANDOMIZER
-	CHERRYCHANCE = 20,
-	BANANACHANCE = 15,
-	COCONUTCHANCE = 5,
-	PEARCHANCE = 3,
-	PINEAPPLECHANCE = 2
-};
+//enum ObjectDropRate //Shannon : Sets chance at which different objects drop
+//{
+//	//Shannon : NOTE - Sum of chance HAS TO EQUAL Randomizer
+//	RANDOMIZER = 100, //Shannon : Sets the random value for Object Chance as 1 ~ RANDOMIZER (e.g. 1~100)
+//	APPLECHANCE = 80, //Shannon : Chance of Apple appearing = APPLECHANCE/RANDOMIZER
+//	BOMBCHANCE = 20 //Shannon : Chance of Bomb appearing = BOMBCHANCE/RANDOMIZER
+//};
+
+//Yi Yang: These values should not be Enum constant.
+//		   The appleChance value will decrease and the
+//		   bombChance value will increase as the level
+//		   increases, so I changed them to int instead.
+//         (otherwise a constant value cannot be modified)
+extern int randomizer, appleChance, bombChance, cherryChance, bananaChance, coconutChance, pearChance, pineappleChance, fallSpeed;
+
+
 extern Type Object[10]; //Shannon : Type - Object[MaxNumber]
 extern COORD ObjectStart; //Shannon : Object Starting Location
 extern int timerlimit;
