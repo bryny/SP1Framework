@@ -24,7 +24,6 @@ void update(double dt);     // update the game and the state of the game
 void render();              // renders the current state of the game to the console
 void shutdown();            // do clean up, free memory
 
-
 extern COORD charLocation;
 extern COORD consoleSize;
 

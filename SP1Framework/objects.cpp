@@ -7,8 +7,8 @@
 
 Type Object[10]; //Shannon : Type - Object[MaxNumber]
 int Number = 0; //Shannon : Test
-int timer = 10; //Shannon : Timer - Number of frames per object movement
-int idtype;
+int timer = 10; //Shannon : Timer - Number of frames before objects are updated (excluding Rat)
+int ObjectChance;
 int timerlimit;
 COORD ObjectStart;
 
@@ -34,31 +34,32 @@ void ImplementObjects()
 
 void UpdateObjects()
 {
-	//Shannon : Timer starts
+	//Shannon : Timer slowly countsdown
 	if (timerlimit != 0)
 	{
 		--timerlimit;
 	}
-	//Only works on timer end
+	//Shannon : When timer reaches 0, objects are updated and timer is reset
 	if (timerlimit == 0)
 	{
 		timerlimit = timer;
-		//Shannon : Objects randomly appear based on starting locatio
+		//Shannon : Objects randomly appear based on starting location on top of screen
 		if (Number < 10)
 		{
-			ObjectStart.X = rand() % 50;
-			idtype = rand() % 10 + 1;
+			ObjectStart.X = rand() % 50; //Shannon : Sets the X-coordinate of Object
+			ObjectChance = rand() % RANDOMIZER + 1; //Shannon : Sets the randomizer for objects
 			if (Object[Number].State == UNCREATED)
 			{
 				Object[Number].Location.X = ObjectStart.X;
 				Object[Number].Location.Y = 0;
 				Object[Number].State = CREATED;
-				//Shannon : Define Object
-				if (idtype <= 8)
+
+				//Shannon : Define Objects based on ObjectChance
+				if (ObjectChance <= APPLECHANCE)
 				{
 					Object[Number].id = APPLE;
 				}
-				else
+				else if (ObjectChance <= APPLECHANCE + BOMBCHANCE)
 				{
 					Object[Number].id = BOMB;
 				}
@@ -88,28 +89,40 @@ void UpdateObjects()
 			}
 		}
 	}
-	// Shannon : Objects are 'recycled' after touching player or bottom of screen
+	
 	for (int ii = 0; ii < 10; ++ii)
 	{
+		// Shannon : Objects are 'recycled' after touching player or bottom of screen
 		if (Object[ii].Location.Y == consoleSize.Y - 1)
 		{
-			//Bonus Level
-			if (Object[ii].id == APPLE && Object[ii].State == CREATED && MiniLevel == 4)
+			//Shannon : Bonus Level also counts objects that reach the bottom
+			if (Object[ii].id != BOMB && Object[ii].State == CREATED && MiniLevel == 4)
 			{
 				LevelCounter += 1;
 			}
-			Object[ii].State = UNCREATED;
 
+			//
+			Object[ii].State = UNCREATED;
 		}
 		//Shannon : How objects affect the player when collision happens
 		if (Object[ii].State == CREATED && charLocation.X == Object[ii].Location.X && charLocation.Y == Object[ii].Location.Y)
 		{
+			//Shannon : Object disappears after collision
 			Object[ii].State = UNCREATED;
+
+			//Shannon : If the object is not a bomb, LevelCounter increases
+			if (Object[ii].id != BOMB)
+			{
+				LevelCounter += 1;
+			}
+
+			//Shannon : Apples increase score +200
 			if (Object[ii].id == APPLE)
 			{
 				score += 200;
-				LevelCounter += 1;
 			}
+
+			//Shannon : Bombs make the Player lose 1 Life
 			if (Object[ii].id == BOMB)
 			{
 				--Life.Value;

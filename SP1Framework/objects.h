@@ -7,8 +7,8 @@
 #include <iostream>
 #include <iomanip>
 
-//Objects Variable Declaration
-struct Type //Shannon : Object Struct Draft
+//Objects Variable Declarations
+struct Type //Shannon : Objects' Struct System
 {
 	COORD Location;
 	int State;
@@ -20,16 +20,22 @@ enum ObjectState //Shannon : State of Objects
 	CREATED,
 	RECYCLED
 };
-enum ObjectType //Type of Object
+enum ObjectType //Shannon : Type of Object
 {
 	APPLE,
 	BOMB
+};
+enum ObjectDropRate //Shannon : Sets chance at which different objects drop
+{
+	//Shannon : NOTE - Sum of chance HAS TO EQUAL Randomizer
+	RANDOMIZER = 100, //Shannon : Sets the random value for Object Chance as 1 ~ RANDOMIZER (e.g. 1~100)
+	APPLECHANCE = 80, //Shannon : Chance of Apple appearing = APPLECHANCE/RANDOMIZER
+	BOMBCHANCE = 20 //Shannon : Chance of Bomb appearing = BOMBCHANCE/RANDOMIZER
 };
 extern Type Object[10]; //Shannon : Type - Object[MaxNumber]
 extern COORD ObjectStart; //Shannon : Object Starting Location
 extern int timerlimit;
 extern int timer;
-extern int idtype;
 
 //Shannon : The Rat
 void UpdateRat();

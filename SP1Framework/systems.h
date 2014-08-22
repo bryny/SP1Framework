@@ -7,7 +7,7 @@
 #include <iostream>
 #include <iomanip>
 
-//Life System
+//Shannon : Life System
 struct System //Shannon : System Struct Draft
 {
 	int Value;
@@ -17,11 +17,11 @@ extern System Life; //Shannon : Life System
 void ImplementLife();
 void RenderLife();
 
-//Score System
+//Jeffrey : Score System
 extern unsigned long long score;
 void displayscore();
 
-//Level System
+//Shannon : Level System
 extern int LevelCounter;
 extern int MiniLevel;
 void UpdateLevel();

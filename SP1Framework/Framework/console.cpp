@@ -15,10 +15,7 @@ void gotoXY(COORD c)
 void colour(WORD attrib)
 {	
 	HANDLE hstdout = GetStdHandle( STD_OUTPUT_HANDLE );
-	
-	// Tell the user how to stop
-	//SetConsoleTextAttribute( hstdout, 0xEC );
-	
+
 	SetConsoleTextAttribute( hstdout, attrib );
 		
 }
@@ -73,4 +70,15 @@ void cls( HANDLE hConsole )
 bool isKeyPressed(unsigned short key)
 {
     return ((GetAsyncKeyState(key) & 0x8001) != 0);
+}
+
+
+//Sets the size of the console
+void setConsoleSize(unsigned short x, unsigned short y)
+{
+		SMALL_RECT windowSize = {0, 0, x, y};
+
+		HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+		bool bSuccess = SetConsoleWindowInfo(hConsole, TRUE, &windowSize);
+			PERR( bSuccess, "SetConsoleWindowInfo" );
 }

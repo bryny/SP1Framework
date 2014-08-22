@@ -36,7 +36,7 @@ void RenderLife()
 
 
 
-//Score System
+//Jeffrey : Score System
 unsigned long long score;
 void displayscore()
 {
@@ -49,7 +49,7 @@ void displayscore()
 		colour(0x0C);
 		std::cout << "You Won";
 	}
-	else if (Life.Value != 0)
+	if (Life.Value != 0)
 	{
 		gotoXY(70,2);
 		colour(0x1A);
@@ -81,13 +81,13 @@ int LevelCounter = 0;
 //Shannon : Increase Level at certain requirements
 void UpdateLevel()
 {
-	//When level up, update level, reset counter
+	//Shannon : On level up, update level, reset counter
 	if (MiniLevel <= 3 && LevelCounter == 2)
 	{
 		MiniLevel += 1;
 		LevelCounter = 0;
 	}
-	//Increase from 'Bonus' to Next Main Level
+	//Shannon : Transition from 'Bonus' to next Main Level
 	if (MiniLevel == 4 && LevelCounter >= 2)
 	{
 		timer -= 5;
@@ -102,12 +102,15 @@ void UpdateLevel()
 //Shannon : Display the level
 void RenderLevel() 
 {
+	//Shannon : Display for normal levels
 	if (MiniLevel <= 3)
 	{
 		gotoXY(75,10);
 		colour(0x0C);
 		std::cout << Level << '-' << MiniLevel;
 	}
+
+	//Shannon : Display for Bonus Level
 	if (MiniLevel == 4)
 	{
 		gotoXY(75,10);
