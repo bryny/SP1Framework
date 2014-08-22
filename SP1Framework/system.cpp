@@ -81,10 +81,10 @@ int LevelCounter = 0;
 //Shannon : Increase Level at certain requirements
 void UpdateLevel()
 {
-	//When level up, update level, reset counter
+	//When level up, update level, reset counter, Jeffrey : Fix, after player loses. MiniLevel and LevelCounter stay the same
 	if (MiniLevel <= 3 && LevelCounter == 2)
 	{
-		if(Life.Value == 0)
+		if(Life.Value > 0)
 		{
 			MiniLevel == MiniLevel;
 			LevelCounter == LevelCounter;
