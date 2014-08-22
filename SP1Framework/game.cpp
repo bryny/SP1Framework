@@ -66,6 +66,8 @@ void getInput()
     keyPressed[K_LEFT] = isKeyPressed(VK_LEFT);
     keyPressed[K_RIGHT] = isKeyPressed(VK_RIGHT);
     keyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
+	//keyPressed[K_UP] = isKeyPressed(65) => Pressing 'A' = Up
+	//'A' ~ 'Z' = 65~90
 }
 
 void update(double dt)
