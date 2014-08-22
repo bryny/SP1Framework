@@ -63,6 +63,26 @@ void UpdateObjects()
 				{
 					Object[Number].id = BOMB;
 				}
+				else if (ObjectChance < APPLECHANCE + BOMBCHANCE + CHERRYCHANCE)
+				{
+					Object[Number].id = CHERRY;
+				}
+				else if (ObjectChance < APPLECHANCE + BOMBCHANCE + CHERRYCHANCE + BANANACHANCE)
+				{
+					Object[Number].id = BANANA;
+				}
+				else if (ObjectChance < APPLECHANCE + BOMBCHANCE + CHERRYCHANCE + BANANACHANCE + COCONUTCHANCE)
+				{
+					Object[Number].id = COCONUT;
+				}
+				else if (ObjectChance < APPLECHANCE + BOMBCHANCE + CHERRYCHANCE + BANANACHANCE + COCONUTCHANCE + PEARCHANCE)
+				{
+					Object[Number].id = PEAR;
+				}
+				else if (ObjectChance < APPLECHANCE + BOMBCHANCE + CHERRYCHANCE + BANANACHANCE + COCONUTCHANCE + PEARCHANCE + PINEAPPLECHANCE)
+				{
+					Object[Number].id = PINEAPPLE;
+				}
 			}
 		}
 		++Number;
@@ -119,13 +139,34 @@ void UpdateObjects()
 			//Shannon : Apples increase score +200
 			if (Object[ii].id == APPLE)
 			{
-				score += 200;
+				score += 100;
 			}
 
 			//Shannon : Bombs make the Player lose 1 Life
 			if (Object[ii].id == BOMB)
 			{
 				--Life.Value;
+			}
+
+			if (Object[ii].id == CHERRY)
+			{
+				score += 150;
+			}
+			if (Object[ii].id == BANANA)
+			{
+				score += 250;
+			}
+			if (Object[ii].id == COCONUT)
+			{
+				score += 500;
+			}
+			if (Object[ii].id == PEAR)
+			{
+				score += 750;
+			}
+			if (Object[ii].id == PINEAPPLE)
+			{
+				score += 1000;
 			}
 		}
 	}
@@ -182,6 +223,26 @@ void RenderObjects()
 			{
 				colour(0x59);
 				std::cout << (char)66;
+			}
+			else if (Object[i].id == CHERRY)
+			{
+				colour(0x59);
+				std::cout << (char)67;
+			}
+			else if (Object[i].id == BANANA)
+			{
+				colour(0x59);
+				std::cout << (char)68;
+			}
+			else if (Object[i].id == COCONUT)
+			{
+				colour(0x59);
+				std::cout << (char)69;
+			}
+			else if (Object[i].id == PINEAPPLE)
+			{
+				colour(0x59);
+				std::cout << (char)70;
 			}
 		}
 	}
