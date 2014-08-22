@@ -1,0 +1,49 @@
+How to add new objects (e.g. A banana, coconut, fruit cocktail, etc)
+
+
+[CREATE OBJECT]
+
+- Go to objects.h
+
+In enum ObjectType, add the name of the object
+
+In enum ObjectDropRate, add the chance of the object (REMEMBER : SUM OF CHANCE = RANDOMIZER)
+
+
+[MAKE OBJECT APPEAR]
+
+- Go to objects.cpp
+
+In UpdateObjects() under //Shannon : Define Objects based on ObjectChance,
+
+Add another 
+
+else if (ObjectChance < [Sum {e.g. Apple + Bomb + everything else before it + Object}])
+{
+Object[Number].id = OBJECT;
+}
+
+
+[CREATE OBJECT EFFECT]
+
+Under //Shannon : How objects affect the player
+
+Add another
+
+if (Object[ii].id = Object)
+{
+Something happens
+}
+
+
+[RENDER OBJECT]
+
+In RenderObject()
+
+Add another
+
+else if (Object[i].id == Object
+{
+colour();
+std::cout << ????;
+}
