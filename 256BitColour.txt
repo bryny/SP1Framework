@@ -1,0 +1,18 @@
+0~15 = black background
+16~31 = dark blue background
+32~47   = dark green
+48~63    = blue green
+64~79 = dark red
+80~95 = purple
+96~111 = 'gold'
+112~127 = grey
+128~143 = dark grey
+144~159 = blue
+160~175 = green
+175~191 = teal
+192~207 = red
+208~223 = pink
+224~239 = yellow
+240~256 = white
+
+256 bit
