@@ -9,7 +9,7 @@
 128~143 = dark grey
 144~159 = blue
 160~175 = green
-175~191 = teal
+176~191 = teal
 192~207 = red
 208~223 = pink
 224~239 = yellow

@@ -80,6 +80,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="objects.cpp" />
+    <ClCompile Include="render.cpp" />
     <ClCompile Include="system.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +88,7 @@
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="objects.h" />
+    <ClInclude Include="render.h" />
     <ClInclude Include="systems.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

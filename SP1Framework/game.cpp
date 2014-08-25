@@ -5,6 +5,7 @@
 #include "objects.h"
 #include "systems.h"
 #include "Framework\console.h"
+#include "render.h"
 #include <iostream>
 #include <iomanip>
 
@@ -156,6 +157,7 @@ void render()
     gotoXY(0, 0);
     colour(0x59);
     std::cout << elapsedTime << "secs" << std::endl;
+
 
     // render character
     gotoXY(charLocation);
