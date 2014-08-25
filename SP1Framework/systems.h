@@ -26,6 +26,7 @@ extern int LevelCounter;
 extern int MiniLevel;
 void UpdateLevel();
 void RenderLevel();
+void RenderBorder();
 
 //Shannon : Level Timer
 void UpdateLvTimer();
