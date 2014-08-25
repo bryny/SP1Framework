@@ -78,6 +78,13 @@ int Level = 1;
 int MiniLevel = 1;
 int LevelCounter = 0;
 
+//Shannon : Implement Level Timer
+int Lv_Time_Min;
+int Lv_Time_Sec;
+bool Timer_Set = false; //Sets when to reset the timer
+int Timer_Active = 5; //Set to number of FPS
+int Timer_Reset = Timer_Active;
+
 //Shannon : Increase Level at certain requirements
 void UpdateLevel()
 {
@@ -93,6 +100,7 @@ void UpdateLevel()
 				//Condition
 				//if (...)
 				//{
+					Timer_Set = false;
 					++MiniLevel;
 					LevelCounter = 0;
 				//}
@@ -101,6 +109,7 @@ void UpdateLevel()
 				//Condition
 				//if (...)
 				//{
+					Timer_Set = false;
 					++MiniLevel;
 					LevelCounter = 0;
 				//}
@@ -117,6 +126,7 @@ void UpdateLevel()
 				//Condition
 				//if (...)
 				//{
+					Timer_Set = false;
 					++MiniLevel;
 					LevelCounter = 0;
 				//}
@@ -125,6 +135,7 @@ void UpdateLevel()
 				//Condition
 				//if (...)
 				//{
+					Timer_Set = false;
 					++MiniLevel;
 					LevelCounter = 0;
 				//}
@@ -175,31 +186,86 @@ void updateDifficulty()
 		appleChance = 80;
 		bombChance = 20;
 		fallSpeed = 1;
+		if (Timer_Set == false)
+		{
+		Lv_Time_Min = 2;
+		Lv_Time_Sec = 30;
+		Timer_Set = true;
+		}
 	}
 	else if (levelDifficulty == MEDIUM)
 	{
 		appleChance = 70;
 		bombChance = 30;
 		fallSpeed = 1;
+		if (Timer_Set == false)
+		{
+		Lv_Time_Min = 2;
+		Lv_Time_Sec = 0;
+		Timer_Set = true;
+		}
 	}
 	else if (levelDifficulty == HARD)
 	{
 		appleChance = 60;
 		bombChance = 40;
 		fallSpeed = 2;
+		if (Timer_Set == false)
+		{
+		Lv_Time_Min = 1;
+		Lv_Time_Sec = 30;
+		Timer_Set = true;
+		}
 	}
 	else if (levelDifficulty == INSANE)
 	{
 		appleChance = 55;
 		bombChance = 45;
 		fallSpeed = 2;
+		if (Timer_Set == false)
+		{
+		Lv_Time_Min = 1;
+		Lv_Time_Sec = 0;
+		Timer_Set = true;
+		}
 	}
 	else if (levelDifficulty == GODLIKE)
 	{
 		appleChance = 50;
 		bombChance = 50;
 		fallSpeed = 2;
+		if (Timer_Set == false)
+		{
+		Lv_Time_Min = 0;
+		Lv_Time_Sec = 30;
+		Timer_Set = true;
+		}
 	}
+}
+
+//Shannon : Countdown Timer
+void UpdateLvTimer()
+{
+	
+	--Timer_Reset;
+	if (Timer_Reset == 0)
+	{
+	if (Lv_Time_Sec >= 0)
+	{
+		--Lv_Time_Sec;
+	}
+	if (Lv_Time_Sec < 0 && Lv_Time_Min > 0)
+	{
+		Lv_Time_Sec = 59;
+		--Lv_Time_Min;
+	}
+	else if (Lv_Time_Sec == 0 && Lv_Time_Min == 0)
+	{
+		Life.Value = 0;
+	}
+	Timer_Reset = Timer_Active;
+	}
+
 }
 
 
@@ -225,4 +291,12 @@ void RenderLevel()
 		colour(0x0C);
 		std::cout << "Level";
 	}
+}
+
+//Shannon : Display Countdown Timer
+void RenderLvTimer()
+{
+	gotoXY(consoleSize.X/2 - 2,0);
+	colour(0x0C);
+	std::cout << Lv_Time_Min << ":" << Lv_Time_Sec;
 }

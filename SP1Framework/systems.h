@@ -27,6 +27,10 @@ extern int MiniLevel;
 void UpdateLevel();
 void RenderLevel();
 
+//Shannon : Level Timer
+void UpdateLvTimer();
+void RenderLvTimer();
+
 //Yi Yang: Level System
 enum Difficulty 
 {

@@ -45,8 +45,9 @@ enum ObjectType //Shannon : Type of Object
 //         (otherwise a constant value cannot be modified)
 extern int randomizer, appleChance, bombChance, cherryChance, bananaChance, coconutChance, pearChance, pineappleChance, fallSpeed;
 
-
-extern Type Object[10]; //Shannon : Type - Object[MaxNumber]
+const int NumberLimit = 10; // Shannon : Max number of objects to be falling
+const int TotalLimit = 20; //Shannon : NumberLimit + Minimum Requirement
+extern Type Object[TotalLimit]; //Shannon : Type - Object[MaxNumber]
 extern COORD ObjectStart; //Shannon : Object Starting Location
 extern int timerlimit;
 extern int timer;

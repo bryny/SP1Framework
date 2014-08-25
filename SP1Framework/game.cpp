@@ -129,6 +129,8 @@ void update(double dt)
 	UpdateObjects();
 	UpdateRat();
 
+	//Shannon : Update Level Timer
+	UpdateLvTimer();
 
 	} //Shannon : End of Life Detection
 
@@ -172,4 +174,6 @@ void render()
 	//Shannon : Render Level System
 	RenderLevel();
 
+	//Shannon : Render Level Timer
+	RenderLvTimer();
 }

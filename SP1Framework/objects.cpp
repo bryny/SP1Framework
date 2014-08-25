@@ -5,8 +5,11 @@
 #include <iostream>
 #include <iomanip>
 
-Type Object[10]; //Shannon : Type - Object[MaxNumber]
+
+
+Type Object[TotalLimit]; //Shannon : Type - Object[MaxNumber + Minimum requirement]
 int Number = 0; //Shannon : Test
+int Number2 = NumberLimit;
 int timer = 10; //Shannon : Timer - Number of frames before objects are updated (excluding Rat)
 int ObjectChance;
 int timerlimit;
@@ -19,7 +22,7 @@ int RatChance;
 void ImplementObjects()
 {
 	// Shannon : Implement Objects
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < 20; ++i)
 	{
 		Object[i].State = UNCREATED;
 	}
@@ -39,6 +42,47 @@ void ImplementObjects()
 //         (otherwise a constant value cannot be modified)
 int randomizer, appleChance, bombChance, cherryChance, bananaChance, coconutChance, pearChance, pineappleChance, fallSpeed;
 
+//Create the minimum objects based on Level Counter
+void MinimumObjects()
+{
+	//Create Objects
+	Object[Number2].State = CREATED;
+	if (ObjectStart.X + 5 < consoleSize.X - 1 )
+	{
+	Object[Number2].Location.X = ObjectStart.X + 5; //Lack of Collision, makedo system
+	}
+	else
+	{
+	Object[Number2].Location.X = ObjectStart.X - 5; //Lack of Collision, makedo system
+	}
+	Object[Number2].Location.Y = 0;
+	//ID Objects as anything but bombs
+	if (ObjectChance <= appleChance + bombChance)
+				{
+					Object[Number2].id = APPLE;
+				}
+				else if (ObjectChance < appleChance + bombChance + cherryChance)
+				{
+					Object[Number2].id = CHERRY;
+				}
+				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance)
+				{
+					Object[Number2].id = BANANA;
+				}
+				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + coconutChance)
+				{
+					Object[Number2].id = COCONUT;
+				}
+				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + coconutChance + pearChance)
+				{
+					Object[Number2].id = PEAR;
+				}
+				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + coconutChance + pearChance + pineappleChance)
+				{
+					Object[Number2].id = PINEAPPLE;
+				}
+}
+
 void UpdateObjects()
 {
 	//Shannon : Timer slowly countsdown
@@ -51,7 +95,7 @@ void UpdateObjects()
 	{
 		timerlimit = timer;
 		//Shannon : Objects randomly appear based on starting location on top of screen
-		if (Number < 10)
+		if (Number < NumberLimit)
 		{
 			ObjectStart.X = rand() % 50; //Shannon : Sets the X-coordinate of Object
 			ObjectChance = rand() % randomizer + 1; //Shannon : Sets the randomizer for objects
@@ -93,12 +137,18 @@ void UpdateObjects()
 			}
 		}
 		++Number;
-		if (Number == 10)
+		if (Number == NumberLimit)
 		{
 			Number = 0;
 		}
+		if (Number2 < TotalLimit)
+		{
+		MinimumObjects(); //Create the minimum Objects required
+		++Number2;
+		}
+
 		//	Shannon : Objects slowly descend to player
-		for (int ii = 0; ii < 10; ++ii)
+		for (int ii = 0; ii < TotalLimit; ++ii)
 		{
 			if (Object[ii].State == CREATED)
 			{
@@ -110,7 +160,7 @@ void UpdateObjects()
 		}
 	}
 	
-	for (int ii = 0; ii < 10; ++ii)
+	for (int ii = 0; ii < TotalLimit; ++ii)
 	{
 		// Shannon : Objects are 'recycled' after touching player or bottom of screen
 		if (Object[ii].Location.Y == consoleSize.Y - 1)
@@ -172,6 +222,9 @@ void UpdateObjects()
 	}
 }
 
+
+
+
 void UpdateRat()
 {
 	//Shannon : If Rat is uncreated, it has a chance to spawn
@@ -209,7 +262,7 @@ void UpdateRat()
 void RenderObjects()
 {
 	// Shannon : Render objects if created
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < TotalLimit; ++i)
 	{
 		if (Object[i].State == CREATED)
 		{
