@@ -14,27 +14,37 @@ void ImplementLife()
 	Life.Value = 3;
 	for (int i = 0; i < 3; ++i)
 	{
-		Life.Location[i].X = consoleSize.X - 2*(i+1);
-		Life.Location[i].Y = consoleSize.Y - 20;
+		Life.Location[i].X = consoleSize.X - 2*(i+2);
+		Life.Location[i].Y = consoleSize.Y - 53;
 	}
 }
 
 void RenderLife()
 {
 	// Shannon : Render Life System
+	// Jenny: heart
+	char heart = 3;
 	for (int i = 0; i < 3; ++i)
 	{
 		if (Life.Value > i)
 		{
 			gotoXY(Life.Location[i]);
 			colour(0x0C);
-			std::cout <<(char)1;
+			std::cout << heart;
 		}
 	}
 }
 
-
-
+void RenderBorder()
+{
+	// Jenny: Border of x on the right
+	for (int y = 2; y <= 52; y++)
+	{
+		gotoXY(68,y);
+		colour(0x1A);
+		std::cout << 'x';
+	}
+}
 
 //Jeffrey : Score System
 unsigned long long score;
