@@ -26,7 +26,7 @@ enum ObjectType //Shannon : Type of Object
 	BOMB, 
 	CHERRY, // SCORE = 150, COMMON
 	BANANA, // SCORE = 250, COMMON
-	COCONUT, // SCORE = 500, RARE
+	ORANGE, // SCORE = 500, RARE
 	PEAR, // SCORE = 750, RARE
 	PINEAPPLE //SCORE = 1000, VERY RARE
 };
