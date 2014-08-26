@@ -1,10 +1,6 @@
 #include "game.h"
 #include "objects.h"
 #include "systems.h"
-#include "Framework\console.h"
-#include <iostream>
-#include <iomanip>
-
 
 //Life System
 System Life; //Shannon : Life System
@@ -35,9 +31,9 @@ void RenderLife()
 	}
 }
 
+// Jenny: Border of x on the right
 void RenderBorder()
 {
-	// Jenny: Border of x on the right
 	for (int y = 2; y <= 52; y++)
 	{
 		gotoXY(68,y);
@@ -63,7 +59,7 @@ void displayscore()
 	{
 		gotoXY(70,2);
 		colour(0x1A);
-		std::cout << "highscore:";
+		std::cout << "Score:";
 		gotoXY(70,3);
 		colour(0x1A);
 		std::cout << score;
@@ -73,9 +69,9 @@ void displayscore()
 		gotoXY(35, 10);
 		colour(0x0C);
 		std::cout << "GAME OVER";
-		gotoXY(32, 11);
-		colour(0x0C);
-		std::cout << "Your score is "<< score;
+
+		//Jenny : call for score.cpp
+		scoreboard();
 	}
 
 }

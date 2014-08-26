@@ -1,8 +1,8 @@
 #ifndef _SCORE_H
 #define _SCORE_H
 
-#include "objects.h"
 #include "game.h"
+#include "systems.h"
 #include "Framework\console.h"
 #include <iostream>
 #include <iomanip>
@@ -11,12 +11,15 @@
 
 using std :: string; 
 
-struct scoreboard
+struct board
 {	
 	string name;
 	int highScore;
 };
 
+int Read(string fileName, highscore* pHS);
+int Write(string fileName, highscore* pHS);
 void scoreboard();
-
+int playerScore;
+string enteredName;
 #endif

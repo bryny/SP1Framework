@@ -6,7 +6,7 @@
 #include "systems.h"
 #include "Framework\console.h"
 #include "render.h"
-#include <iostream>
+#include <iostream>   
 #include <iomanip>
 
 
@@ -161,7 +161,7 @@ void render()
     //Jenny : Render Character
 	Render_Man();
 
-	//Shannon : Render Score System
+	//Jeffrey : Render Score System
 	displayscore();
 
 	//Shannon : Render Objects & Rat
