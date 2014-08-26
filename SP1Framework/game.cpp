@@ -62,7 +62,7 @@ void shutdown()
 
 void getInput()
 {    
-    keyPressed[K_UP] = isKeyPressed(65);
+    keyPressed[K_UP] = isKeyPressed(VK_UP);
     keyPressed[K_DOWN] = isKeyPressed(VK_DOWN);
     keyPressed[K_LEFT] = isKeyPressed(VK_LEFT);
     keyPressed[K_RIGHT] = isKeyPressed(VK_RIGHT);

@@ -419,7 +419,7 @@ void Render_Pear(int num)
 
 	if (Object[num].RenderTime > 3)
 	{
-	gotoXY(Object[num].LeftSide[3].X + 1,Object[num].LeftSide[0].Y);
+	gotoXY(Object[num].LeftSide[3].X + 1,Object[num].LeftSide[3].Y);
 	green(3);
 	}
 

@@ -302,6 +302,10 @@ void RenderObjects()
 			{
 				Render_Orange(i);
 			}
+			else if (Object[i].id == PEAR)
+			{
+				Render_Pear(i);
+			}
 			else if (Object[i].id == PINEAPPLE)
 			{
 				Render_Pineapple(i);
