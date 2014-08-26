@@ -106,34 +106,70 @@ void UpdateObjects()
 				Object[Number].Location.Y = 0;
 				Object[Number].State = CREATED;
 
+				for (int i = 0; i < 7; ++i)
+				{
+					//Shannon : Set collision detection field
+					Object[Number].LeftSide[i].Y = Object[Number].Location.Y - i;
+					Object[Number].RightSide[i].Y = Object[Number].Location.Y - i;
+					Object[Number].LeftSide[i].X = Object[Number].Location.X;
+				}
+
 				//Shannon : Define Objects based on ObjectChance
 				if (ObjectChance <= appleChance)
 				{
 					Object[Number].id = APPLE;
+					for (int i = 0; i < 7; ++i)
+					{
+						Object[Number].RightSide[i].X = Object[Number].Location.X + 4;
+					}
 				}
 				else if (ObjectChance <= appleChance + bombChance)
 				{
 					Object[Number].id = BOMB;
+					for (int i = 0; i < 7; ++i)
+					{
+						Object[Number].RightSide[i].X = Object[Number].Location.X + 4;
+					}
 				}
 				else if (ObjectChance < appleChance + bombChance + cherryChance)
 				{
 					Object[Number].id = CHERRY;
+					for (int i = 0; i < 7; ++i)
+					{
+						Object[Number].RightSide[i].X = Object[Number].Location.X + 6;
+					}
 				}
 				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance)
 				{
 					Object[Number].id = BANANA;
+					for (int i = 0; i < 7; ++i)
+					{
+						Object[Number].RightSide[i].X = Object[Number].Location.X + 5;
+					}
 				}
 				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance)
 				{
 					Object[Number].id = ORANGE;
+					for (int i = 0; i < 7; ++i)
+					{
+						Object[Number].RightSide[i].X = Object[Number].Location.X + 4;
+					}
 				}
 				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance + pearChance)
 				{
 					Object[Number].id = PEAR;
+					for (int i = 0; i < 7; ++i)
+					{
+						Object[Number].RightSide[i].X = Object[Number].Location.X + 4;
+					}
 				}
 				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance + pearChance + pineappleChance)
 				{
 					Object[Number].id = PINEAPPLE;
+					for (int i = 0; i < 7; ++i)
+					{
+						Object[Number].RightSide[i].X = Object[Number].Location.X + 4;
+					}
 				}
 			}
 		}
@@ -257,41 +293,6 @@ void UpdateRat()
 	}
 }
 
-void renderBomb()
-{
-	for (int i=0; i < 10; i++)
-	{
-		if(Object[i].id == BOMB)
-		{
-		gotoXY(Object[i].Location.X+2, Object[i].Location.Y+1);
-		yellow(1);
-		red(1);
-
-		gotoXY(Object[i].Location.X+2, Object[i].Location.Y+2);
-		red(1);
-		gotoXY(Object[i].Location.X+4, Object[i].Location.Y+2);
-		yellow(1);
-		
-		gotoXY(Object[i].Location.X+1, Object[i].Location.Y+3);
-		black(3);
-
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+4);
-		black(1);
-		white(1);
-		black(3);
-
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+5);
-		black(5);
-
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+6);
-		black(5);
-
-		gotoXY(Object[i].Location.X+1, Object[i].Location.Y+7);
-		black(3);
-		}
-	}
-}
-
 void renderRat()
 {
 	gotoXY(Rat.Location.X, Rat.Location.Y-4);
@@ -317,169 +318,6 @@ void renderRat()
 
 }
 
-void renderPineapple()
-{
-	for (int i=0; i < 10; i++)
-	{
-		if(Object[i].id == PINEAPPLE)
-		{
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+1);
-		d_green(1);
-		gotoXY(Object[i].Location.X+2, Object[i].Location.Y+1);
-		d_green(1);
-		gotoXY(Object[i].Location.X+4, Object[i].Location.Y+1);
-		d_green(1);
-
-		gotoXY(Object[i].Location.X+1, Object[i].Location.Y+2);
-		d_green(1);
-		gotoXY(Object[i].Location.X+3, Object[i].Location.Y+2);
-		d_green(1);
-
-		gotoXY(Object[i].Location.X+2, Object[i].Location.Y+3);
-		d_green(1);
-
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+4);
-		brown(1);
-		yellow(1);
-		brown(1);
-
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+5);
-		yellow(1);
-		brown(1);
-		yellow(1);
-
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+6);
-		brown(1);
-		yellow(1);
-		brown(1);
-
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+7);
-		yellow(1);
-		brown(1);
-		yellow(1);
-
-		}
-	}
-}
-
-void renderCherry()
-{
-	for (int i=0; i < 10; i++)
-	{
-		if(Object[i].id == CHERRY)
-		{
-		gotoXY(Object[i].Location.X+1, Object[i].Location.Y+1);
-		d_green(2);
-		gotoXY(Object[i].Location.X+4, Object[i].Location.Y+1);
-		d_green(2);
-
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+2);
-		d_green(2);
-		gotoXY(Object[i].Location.X+3, Object[i].Location.Y+2);
-		d_red(1);
-		gotoXY(Object[i].Location.X+5, Object[i].Location.Y+2);
-		d_green(2);
-
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+3);
-		d_green(1);
-		gotoXY(Object[i].Location.X+3, Object[i].Location.Y+3);
-		d_red(1);
-		gotoXY(Object[i].Location.X+6, Object[i].Location.Y+3);
-		d_green(1);
-
-		gotoXY(Object[i].Location.X+2, Object[i].Location.Y+4);
-		d_red(3);
-
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+5);
-		red(1);
-		d_red(1);
-		red(1);
-		gotoXY(Object[i].Location.X+4, Object[i].Location.Y+5);
-		red(1);
-		d_red(1);
-		red(1);
-
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+6);
-		red(3);
-		gotoXY(Object[i].Location.X+4, Object[i].Location.Y+6);
-		red(3);
-
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+7);
-		red(3);
-		gotoXY(Object[i].Location.X+4, Object[i].Location.Y+7);
-		red(3);
-		}
-	}
-}
-
-void renderBanana()
-{
-	char a[] =   {","};
-	char b[] =   {"\\`.__."};
-	char c[] =   {" `._,'"};
-
-	for (int i=0; i < 10; i++)
-	{
-		if(Object[i].id == BANANA)
-		{
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+1);
-		std  :: cout << a<<std::endl;
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+2);
-		std :: cout << b<<std::endl;
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+3);
-		std :: cout << c<<std::endl;
-		}
-	}
-}
-
-void pear()
-{
-	char a[] =   {"  ("};
-	char b[] =   {" / \\"};
-	char c[] =   {"(   )"};
-	char d[] =   {" `""'"};
-
-	for (int i=0; i < 10; i++)
-	{
-		if(Object[i].id == PEAR)
-		{
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+1);
-		std  :: cout << a<<std::endl;
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+2);
-		std :: cout << b<<std::endl;
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+3);
-		std :: cout << c<<std::endl;
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+4);
-		std :: cout << d<<std::endl;
-		}
-	}
-}
-
-void orange()
-{
-	char a[] =   {" ,,+.."};
-	char b[] =   {"//|||\\\\"};
-	char c[] =   {"|||||||"};
-	char d[] =   {"\\\\|||//"};
-	char e[] =   {" ``+''"};
-	for (int i=0; i < 10; i++)
-	{
-		if(Object[i].id == ORANGE)
-		{
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+1);
-		std  :: cout << a<<std::endl;
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+2);
-		std :: cout << b<<std::endl;
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+3);
-		std :: cout << c<<std::endl;
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+4);
-		std :: cout << d<<std::endl;
-		gotoXY(Object[i].Location.X, Object[i].Location.Y+5);
-		std :: cout << e<<std::endl;
-		}
-	}
-}
-
 void RenderObjects()
 {
 	// Shannon : Render objects if created
@@ -490,31 +328,27 @@ void RenderObjects()
 			gotoXY(Object[i].Location);
 			if (Object[i].id == APPLE)
 			{
-				colour(0x0C);
-				std::cout << (char)65;
+				Render_Apple(i);
 			}
 			else if (Object[i].id == BOMB)
 			{
-				renderBomb();
+				Render_Bomb(i);
 			}
 			else if (Object[i].id == CHERRY)
 			{
-				colour(0x59);
-				std::cout << (char)67;
+				Render_Cherry(i);
 			}
 			else if (Object[i].id == BANANA)
 			{
-				colour(0x59);
-				std::cout << (char)68;
+				Render_Banana(i);
 			}
 			else if (Object[i].id == ORANGE)
 			{
-				colour(0x59);
-				std::cout << (char)69;
+				Render_Orange(i);
 			}
 			else if (Object[i].id == PINEAPPLE)
 			{
-				renderPineapple();
+				Render_Pineapple(i);
 			}
 		}
 	}
@@ -522,7 +356,8 @@ void RenderObjects()
 	if (Rat.State == CREATED)
 	{
 		gotoXY(Rat.Location);
-		renderRat();
+		colour(0x0C);
+		std::cout <<(char)75;
 	}
 }
 

@@ -87,7 +87,7 @@ void update(double dt)
     if (keyPressed[K_UP] && charLocation.Y > 0 && jump == ENABLED)
     {
 		 Beep(1440, 30);
-		 charLocation.Y-= 6; 
+		 charLocation.Y -= 6; 
 		 jump = jumptime;
     }
 	//Shannon : Player will stay in the air for number of frames of jumptime
@@ -98,7 +98,7 @@ void update(double dt)
 	//Shannon : Player will fall just before jumping is enabled again
 	if (jump == 1)
 	{
-		charLocation.Y+=6;
+		charLocation.Y +=6;
 	}
 
     if (keyPressed[K_LEFT] && charLocation.X > 0)
@@ -241,7 +241,6 @@ void render()
     std::cout << elapsedTime << "secs" << std::endl;
 
     //Jenny : render character
-    gotoXY(charLocation.X, charLocation.Y-59);
 	man();
 
 	//Shannon : Render Score System

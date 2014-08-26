@@ -11,14 +11,15 @@
 struct Type //Shannon : Objects' Struct System
 {
 	COORD Location;
+	COORD LeftSide[7];
+	COORD RightSide[7];
 	int State;
 	int id;
 };
 enum ObjectState //Shannon : State of Objects
 {
 	UNCREATED,
-	CREATED,
-	RECYCLED
+	CREATED
 };
 enum ObjectType //Shannon : Type of Object
 {

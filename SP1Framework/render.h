@@ -19,4 +19,13 @@ void pink(int num);
 void yellow(int num);
 void white(int num);
 
+//Shannon : Object Render
+void Render_Apple(int num);
+void Render_Bomb(int num);
+void Render_Cherry(int num);
+void Render_Banana(int num);
+void Render_Orange(int num);
+void Render_Pear(int num);
+void Render_Pineapple(int num);
+
 #endif // _RENDER_H
