@@ -16,6 +16,9 @@ int ObjectChance;
 int timerlimit;
 COORD ObjectStart;
 
+
+int xyz;
+
 //Shannon : The Rat
 Type Rat;
 int RatChance;
@@ -34,6 +37,8 @@ void ImplementObjects()
 	Rat.State = UNCREATED;
 	Rat.Location.Y = charLocation.Y;
 	Rat.Location.X = 0;
+
+	xyz = 0;
 }
 
 //Yi Yang: These values should not be Enum constant.
@@ -42,47 +47,6 @@ void ImplementObjects()
 //		   increases, so I changed them to int instead.
 //         (otherwise a constant value cannot be modified)
 int randomizer, appleChance, bombChance, cherryChance, bananaChance, orangeChance, pearChance, pineappleChance, fallSpeed;
-
-//Create the minimum objects based on Level Counter
-void MinimumObjects()
-{
-	//Create Objects
-	Object[Number2].State = CREATED;
-	if (ObjectStart.X + 5 < consoleSize.X - 1 )
-	{
-	Object[Number2].Location.X = ObjectStart.X + 5; //Lack of Collision, makedo system
-	}
-	else
-	{
-	Object[Number2].Location.X = ObjectStart.X - 5; //Lack of Collision, makedo system
-	}
-	Object[Number2].Location.Y = 0;
-	//ID Objects as anything but bombs
-	if (ObjectChance <= appleChance + bombChance)
-				{
-					Object[Number2].id = APPLE;
-				}
-				else if (ObjectChance < appleChance + bombChance + cherryChance)
-				{
-					Object[Number2].id = CHERRY;
-				}
-				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance)
-				{
-					Object[Number2].id = BANANA;
-				}
-				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance)
-				{
-					Object[Number2].id = ORANGE;
-				}
-				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance + pearChance)
-				{
-					Object[Number2].id = PEAR;
-				}
-				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance + pearChance + pineappleChance)
-				{
-					Object[Number2].id = PINEAPPLE;
-				}
-}
 
 void UpdateObjects()
 {
@@ -100,11 +64,20 @@ void UpdateObjects()
 		{
 			ObjectStart.X = rand() % 50; //Shannon : Sets the X-coordinate of Object
 			ObjectChance = rand() % randomizer + 1; //Shannon : Sets the randomizer for objects
-			if (Object[Number].State == UNCREATED)
+
+			if (Object[Number].State == UNCREATED && xyz <= 0)
 			{
+				xyz = 5;
+				//Shannon : Collision Detection , Prevent objects from spawning in collision range of previous objects
+				while (ObjectStart.X < Object[Number-1].RightSide[0].X && ObjectStart.X > Object[Number-1].Location.X - 7)
+				{
+					ObjectStart.X = rand() % 50; //Shannon : Re-Randomize if colliding
+				}
+
 				Object[Number].Location.X = ObjectStart.X;
 				Object[Number].Location.Y = 0;
 				Object[Number].State = CREATED;
+				Object[Number].RenderTime = 0; //Shannon : Initialized to height of object
 
 				for (int i = 0; i < 7; ++i)
 				{
@@ -171,17 +144,17 @@ void UpdateObjects()
 						Object[Number].RightSide[i].X = Object[Number].Location.X + 4;
 					}
 				}
-			}
-		}
-		++Number;
+				++Number;
+			} //Shannon : End of Object Creation
+			--xyz;
+		} //Shannon : End of Object Creation Number Reset
+
+		
+
+		
 		if (Number == NumberLimit)
 		{
 			Number = 0;
-		}
-		if (Number2 < TotalLimit)
-		{
-		MinimumObjects(); //Create the minimum Objects required
-		++Number2;
 		}
 
 		//	Shannon : Objects slowly descend to player
@@ -192,10 +165,16 @@ void UpdateObjects()
 				if (Object[ii].Location.Y < consoleSize.Y - 1)
 				{
 					Object[ii].Location.Y += fallSpeed;
+					for (int i = 0; i < 7; ++i)
+					{
+						Object[ii].LeftSide[i].Y += fallSpeed;
+						Object[ii].RightSide[i].Y += fallSpeed;
+					}
+					++Object[ii].RenderTime;
 				}
 			}
 		}
-	}
+	} //Shannon : End of timer
 	
 	for (int ii = 0; ii < TotalLimit; ++ii)
 	{
@@ -293,30 +272,7 @@ void UpdateRat()
 	}
 }
 
-void renderRat()
-{
-	gotoXY(Rat.Location.X, Rat.Location.Y-4);
-	grey(2);
-	gotoXY(Rat.Location.X+3, Rat.Location.Y-4);
-	grey(2);
 
-	gotoXY(Rat.Location.X, Rat.Location.Y-3);
-	pink(1);
-	grey(3);
-	pink(1);
-
-	gotoXY(Rat.Location.X+1, Rat.Location.Y-2);
-	black(1);
-	grey(1);
-	black(1);
-
-	gotoXY(Rat.Location.X+1, Rat.Location.Y-1);
-	grey(3);
-
-	gotoXY(Rat.Location.X +2, Rat.Location.Y);
-	black(1);
-
-}
 
 void RenderObjects()
 {
@@ -356,8 +312,7 @@ void RenderObjects()
 	if (Rat.State == CREATED)
 	{
 		gotoXY(Rat.Location);
-		colour(0x0C);
-		std::cout <<(char)75;
+		Render_Rat();
 	}
 }
 

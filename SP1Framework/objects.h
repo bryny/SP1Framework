@@ -10,9 +10,10 @@
 //Objects Variable Declarations
 struct Type //Shannon : Objects' Struct System
 {
-	COORD Location;
+	COORD Location; //Starting location to base render around
 	COORD LeftSide[7];
 	COORD RightSide[7];
+	int RenderTime; //Timer to render each row of the object
 	int State;
 	int id;
 };
@@ -44,7 +45,7 @@ enum ObjectType //Shannon : Type of Object
 //		   bombChance value will increase as the level
 //		   increases, so I changed them to int instead.
 //         (otherwise a constant value cannot be modified)
-extern int randomizer, appleChance, bombChance, cherryChance, bananaChance, coconutChance, pearChance, pineappleChance, fallSpeed;
+extern int randomizer, appleChance, bombChance, cherryChance, bananaChance, orangeChance, pearChance, pineappleChance, fallSpeed;
 
 const int NumberLimit = 10; // Shannon : Max number of objects to be falling
 const int TotalLimit = 20; //Shannon : NumberLimit + Minimum Requirement
@@ -55,6 +56,7 @@ extern int timer;
 
 //Shannon : The Rat
 void UpdateRat();
+extern Type Rat;
 
 //Object Functions Declaration
 void ImplementObjects();

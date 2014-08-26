@@ -62,7 +62,7 @@ void shutdown()
 
 void getInput()
 {    
-    keyPressed[K_UP] = isKeyPressed(VK_UP);
+    keyPressed[K_UP] = isKeyPressed(65);
     keyPressed[K_DOWN] = isKeyPressed(VK_DOWN);
     keyPressed[K_LEFT] = isKeyPressed(VK_LEFT);
     keyPressed[K_RIGHT] = isKeyPressed(VK_RIGHT);
@@ -141,89 +141,7 @@ void update(double dt)
         g_quitGame = true;    
 }
 
-//Jenny : print man
-void man()
-{
-	gotoXY(charLocation.X, charLocation.Y-11);
-	grey(1);
-	gotoXY(charLocation.X+10, charLocation.Y-11);
-	grey(1);
-	
-	gotoXY(charLocation.X, charLocation.Y-10);
-	grey(1);
-	gotoXY(charLocation.X+10, charLocation.Y-10);
-	grey(1);
-	
-	gotoXY(charLocation.X, charLocation.Y-9);
-	grey(11);
 
-	gotoXY(charLocation.X, charLocation.Y-8);
-	d_red(1);
-	grey(9);
-	
-	//Head
-	gotoXY(charLocation.X, charLocation.Y-7);
-	d_red(2);
-	gotoXY(charLocation.X+3, charLocation.Y-7);
-	d_red(5);
-	
-	gotoXY(charLocation.X+1, charLocation.Y-6);
-	d_red(1);
-	gotoXY(charLocation.X+3, charLocation.Y-6);
-	d_red(1);
-	black(1);
-	d_red(1);
-	black(1);
-	d_red(1);
-
-	gotoXY(charLocation.X+1, charLocation.Y-5);
-	d_red(1);
-	gotoXY(charLocation.X+3, charLocation.Y-5);
-	d_red(1);
-	black(1);
-	d_red(1);
-	black(1);
-	d_red(1);
-
-	gotoXY(charLocation.X+1, charLocation.Y-4);
-	d_red(1);
-	blue(1);
-	pink(1);
-	d_red(3);
-	pink(1);
-	blue(1);
-	d_red(1);
-
-	gotoXY(charLocation.X+1, charLocation.Y-3);
-	d_red(1);
-	blue(1);
-	d_red(2);
-	red(1);
-	d_red(2);
-	blue(1);
-	d_red(1);
-	
-	//Shirt
-	gotoXY(charLocation.X+3, charLocation.Y-2);
-	blue(5);
-
-	gotoXY(charLocation.X+9, charLocation.Y-2);
-	d_red(1);
-	
-	//Pants
-	gotoXY(charLocation.X+4, charLocation.Y-1);
-	black(3);
-
-	gotoXY(charLocation.X+9, charLocation.Y-1);
-	d_red(2);
-
-	//Feet
-	gotoXY(charLocation.X+3, charLocation.Y);
-	d_red(2);
-
-	gotoXY(charLocation.X+6, charLocation.Y);
-	d_red(2);
-}
 
 void render()
 {
@@ -240,8 +158,8 @@ void render()
     colour(0x59);
     std::cout << elapsedTime << "secs" << std::endl;
 
-    //Jenny : render character
-	man();
+    //Jenny : Render Character
+	Render_Man();
 
 	//Shannon : Render Score System
 	displayscore();

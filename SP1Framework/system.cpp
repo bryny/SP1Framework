@@ -189,12 +189,28 @@ void updateDifficulty()
 		break;
 	}
 	
-	//Set the actual Difficulty by modifying these values below
+	/*
+	Chance list :
+	-bombChance
+	-appleChance	 100pts
+	-cherryChance	 150pts
+	-bananaChance	 250pts
+	-orangeChance	 500pts
+	-pearChance		 750pts
+	-pineappleChance 1000pts
+	
+	Set the actual Difficulty by modifying these values below */
 	randomizer = 100; //this will always be 100
 	if (levelDifficulty == EASY)
 	{
-		appleChance = 80;
+		appleChance = 30;
 		bombChance = 20;
+		cherryChance = 15;
+		bananaChance = 15;
+		orangeChance = 8;
+		pearChance = 7;
+		pineappleChance = 5;
+
 		fallSpeed = 1;
 		if (Timer_Set == false)
 		{
