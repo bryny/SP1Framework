@@ -6,182 +6,63 @@
 #include "objects.h"
 
 //Shannon : Simplifying the colour creation
-void black(int num)
-{
-	colour(0);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-}
-void d_blue(int num)
-{
-	colour(16);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-};
-void d_green(int num)
-{
-	colour(32);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-};
-void d_cyan(int num)
-{
-	colour(48);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-};
-void d_red(int num)
-{
-	colour(64);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-};
-void purple(int num)
-{
-	colour(80);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-};
-void brown(int num)
-{
-	colour(96);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-};
-void grey(int num)
-{
-	colour(112);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-};
-void d_grey(int num)
-{
-	colour(128);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-};
-void blue(int num)
-{
-	colour(144);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-};
-void green(int num)
-{
-	colour(160);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-};
-void cyan(int num)
-{
-	colour(176);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-};
-void red(int num)
-{
-	colour(192);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-};
-void pink(int num)
-{
-	colour(208);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-};
-void yellow(int num)
-{
-	colour(224);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-};
-void white(int num)
-{
-	colour(240);
-	for (int number = 0; number < num; ++number)
-	{
-		std::cout << " ";
-	}
-};
+WORD black = 0;
+WORD d_blue = 16;
+WORD d_green = 32;
+WORD d_cyan = 48;
+WORD d_red = 64;
+WORD purple = 80;
+WORD brown = 96;
+WORD grey = 112;
+WORD d_grey = 128;
+WORD blue = 144;
+WORD green = 160;
+WORD cyan = 176;
+WORD red = 192;
+WORD pink = 208;
+WORD yellow = 224;
+WORD white = 240;
 
 //Shannon : Final Render
 
-//Shannon : Render fruits from bottom to top
+//Shannon : Render objects from bottom to top
 void Render_Apple(int num)
 {
 	if (Object[num].RenderTime > 0)
 	{
-		gotoXY(Object[num].LeftSide[0].X + 1,Object[num].LeftSide[0].Y);
-		red(3);
+		writeToBuffer(Object[num].Area[1][0],"   ",red);
 	}
 	
 	if (Object[num].RenderTime > 1)
 	{
-		gotoXY(Object[num].LeftSide[1]);
-		red(5);
+		writeToBuffer(Object[num].Area[0][1],"     ",red);
 	}
 
 	if (Object[num].RenderTime > 2)
 	{
-		gotoXY(Object[num].LeftSide[2]);
-		red(5);
+		writeToBuffer(Object[num].Area[0][2],"     ",red);
 	}
 
 	if (Object[num].RenderTime > 3)
 	{
-		gotoXY(Object[num].LeftSide[3]);
-		red(1);
-		white(1);
-		red(3);
+		writeToBuffer(Object[num].Area[0][3]," ",red);
+		writeToBuffer(Object[num].Area[1][3]," ",white);
+		writeToBuffer(Object[num].Area[2][3],"   ",red);
 	}
 
 	if (Object[num].RenderTime > 4)
 	{
-		gotoXY(Object[num].LeftSide[4].X + 1,Object[num].LeftSide[4].Y);
-		red(3);
+		writeToBuffer(Object[num].Area[1][4],"   ",red);
 	}
 
 	if (Object[num].RenderTime > 5)
 	{
-		gotoXY(Object[num].LeftSide[5].X + 2,Object[num].LeftSide[5].Y);
-		d_green(3);
+		writeToBuffer(Object[num].Area[2][5],"   ",d_green);
 	}
 
 	if (Object[num].RenderTime > 6)
 	{
-		gotoXY(Object[num].LeftSide[6].X + 3,Object[num].LeftSide[6].Y);
-		d_green(2);
+		writeToBuffer(Object[num].Area[3][6],"  ",d_green);
 	}
 }
 
@@ -189,49 +70,41 @@ void Render_Bomb(int num)
 {
 	if (Object[num].RenderTime > 0)
 	{
-	gotoXY(Object[num].LeftSide[0].X + 1,Object[num].LeftSide[0].Y);
-	black(3);
+		writeToBuffer(Object[num].Area[1][0],"   ",black);
 	}
 
 	if (Object[num].RenderTime > 1)
 	{
-	gotoXY(Object[num].LeftSide[1]);
-	black(5);
+		writeToBuffer(Object[num].Area[0][1],"     ",black);
 	}
 
 	if (Object[num].RenderTime > 2)
 	{
-	gotoXY(Object[num].LeftSide[2]);
-	black(5);
+		writeToBuffer(Object[num].Area[0][2],"     ",black);
 	}
 
 	if (Object[num].RenderTime > 3)
 	{
-	gotoXY(Object[num].LeftSide[3]);
-	black(1);
-	white(1);
-	black(3);
+		writeToBuffer(Object[num].Area[0][3]," ",black);
+		writeToBuffer(Object[num].Area[1][3]," ",white);
+		writeToBuffer(Object[num].Area[2][3],"   ",black);
 	}
 
 	if (Object[num].RenderTime > 4)
 	{
-	gotoXY(Object[num].LeftSide[4].X + 1,Object[num].LeftSide[4].Y);
-	black(3);
+		writeToBuffer(Object[num].Area[1][4],"   ",black);
 	}
 
 	if (Object[num].RenderTime > 5)
 	{
-	gotoXY(Object[num].LeftSide[5].X + 2,Object[num].LeftSide[5].Y);
-	red(1);
-	gotoXY(Object[num].LeftSide[5].X + 4,Object[num].LeftSide[5].Y);
-	yellow(1);
+		writeToBuffer(Object[num].Area[2][5]," ",red);
+		writeToBuffer(Object[num].Area[4][5]," ",yellow);
 	}
 
 	if (Object[num].RenderTime > 6)
 	{
-	gotoXY(Object[num].LeftSide[6].X + 2,Object[num].LeftSide[6].Y);
-	red(1);
-	brown(1);
+		writeToBuffer(Object[num].Area[2][6]," ",red);
+		writeToBuffer(Object[num].Area[3][6]," ",brown);
 	}
 }
 
@@ -239,66 +112,50 @@ void Render_Cherry(int num)
 {
 	if (Object[num].RenderTime > 0)
 	{
-	gotoXY(Object[num].LeftSide[0]);
-	red(3);
-	gotoXY(Object[num].LeftSide[0].X + 4,Object[num].LeftSide[0].Y);
-	red(3);
+		writeToBuffer(Object[num].Area[0][0],"   ",red);
+		writeToBuffer(Object[num].Area[4][0],"   ",red);
 	}
 	
 	if (Object[num].RenderTime > 1)
 	{
-	gotoXY(Object[num].LeftSide[1]);
-	red(3);
-	gotoXY(Object[num].LeftSide[1].X + 4,Object[num].LeftSide[1].Y);
-	red(3);
+		writeToBuffer(Object[num].Area[0][1],"   ",red);
+		writeToBuffer(Object[num].Area[4][1],"   ",red);
 	}
 
 	if (Object[num].RenderTime > 2)
 	{
-	gotoXY(Object[num].LeftSide[2]);
-	red(1);
-	d_red(1);
-	red(1);
-	gotoXY(Object[num].LeftSide[2].X + 4,Object[num].LeftSide[2].Y);
-	red(1);
-	d_red(1);
-	red(1);
+		writeToBuffer(Object[num].Area[0][2]," ",red);
+		writeToBuffer(Object[num].Area[1][2]," ",d_red);
+		writeToBuffer(Object[num].Area[2][2]," ",red);
+		writeToBuffer(Object[num].Area[4][2]," ",red);
+		writeToBuffer(Object[num].Area[5][2]," ",d_red);
+		writeToBuffer(Object[num].Area[6][2]," ",red);
 	}
 
 	if (Object[num].RenderTime > 3)
 	{
-	gotoXY(Object[num].LeftSide[3].X + 2,Object[num].LeftSide[3].Y);
-	d_red(1);
-	gotoXY(Object[num].LeftSide[3].X + 4,Object[num].LeftSide[3].Y);
-	d_red(1);
+		writeToBuffer(Object[num].Area[2][3]," ",d_red);
+		writeToBuffer(Object[num].Area[4][3]," ",d_red);
 	}
 
 	if (Object[num].RenderTime > 4)
 	{
-	gotoXY(Object[num].LeftSide[4]);
-	d_green(1);
-	gotoXY(Object[num].LeftSide[4].X + 3,Object[num].LeftSide[4].Y);
-	d_red(1);
-	gotoXY(Object[num].LeftSide[4].X + 6,Object[num].LeftSide[4].Y);
-	d_green(1);
+		writeToBuffer(Object[num].Area[0][4]," ",d_green);
+		writeToBuffer(Object[num].Area[3][4]," ",d_red);
+		writeToBuffer(Object[num].Area[6][4]," ",d_green);
 	}
 
 	if (Object[num].RenderTime > 5)
 	{
-	gotoXY(Object[num].LeftSide[5]);
-	d_green(2);
-	gotoXY(Object[num].LeftSide[5].X + 3,Object[num].LeftSide[5].Y);
-	d_red(1);
-	gotoXY(Object[num].LeftSide[5].X + 5,Object[num].LeftSide[5].Y);
-	d_green(2);
+		writeToBuffer(Object[num].Area[0][5],"  ",d_green);
+		writeToBuffer(Object[num].Area[3][5]," ",d_red);
+		writeToBuffer(Object[num].Area[5][5],"  ",d_green);
 	}
 
 	if (Object[num].RenderTime > 6)
 	{
-	gotoXY(Object[num].LeftSide[6].X + 1,Object[num].LeftSide[6].Y);
-	d_green(2);
-	gotoXY(Object[num].LeftSide[6].X + 4,Object[num].LeftSide[6].Y);
-	d_green(2);
+		writeToBuffer(Object[num].Area[1][6],"  ",d_green);
+		writeToBuffer(Object[num].Area[4][6],"  ",d_green);
 	}
 }
 
@@ -306,45 +163,38 @@ void Render_Banana(int num)
 {
 	if (Object[num].RenderTime > 0)
 	{
-	gotoXY(Object[num].LeftSide[0].X + 2,Object[num].LeftSide[0].Y);
-	yellow(3);
+		writeToBuffer(Object[num].Area[2][0],"   ",yellow);
 	}
 	
 	if (Object[num].RenderTime > 1)
 	{
-	gotoXY(Object[num].LeftSide[1]);
-	brown(1);
-	yellow(5);
+		writeToBuffer(Object[num].Area[0][1]," ",brown);
+		writeToBuffer(Object[num].Area[1][1],"     ",yellow);
 	}
 
 	if (Object[num].RenderTime > 2)
 	{
-	gotoXY(Object[num].LeftSide[2].X + 3,Object[num].LeftSide[2].Y);
-	yellow(3);
+		writeToBuffer(Object[num].Area[3][2],"   ",yellow);
 	}
 
 	if (Object[num].RenderTime > 3)
 	{
-	gotoXY(Object[num].LeftSide[3].X + 4,Object[num].LeftSide[3].Y);
-	yellow(2);
+		writeToBuffer(Object[num].Area[4][3],"  ",yellow);
 	}
 
 	if (Object[num].RenderTime > 4)
 	{
-	gotoXY(Object[num].LeftSide[4].X + 4,Object[num].LeftSide[4].Y);
-	yellow(2);
+		writeToBuffer(Object[num].Area[4][4],"  ",yellow);
 	}
 
 	if (Object[num].RenderTime > 5)
 	{
-	gotoXY(Object[num].LeftSide[5].X + 4,Object[num].LeftSide[5].Y);
-	yellow(1);
+		writeToBuffer(Object[num].Area[4][5]," ",yellow);
 	}
 
 	if (Object[num].RenderTime > 6)
 	{
-	gotoXY(Object[num].LeftSide[6].X + 3,Object[num].LeftSide[6].Y);
-	brown(3);
+		writeToBuffer(Object[num].Area[3][6],"   ",brown);
 	}
 }
 
@@ -352,46 +202,39 @@ void Render_Orange(int num)
 {
 	if (Object[num].RenderTime > 0)
 	{
-	gotoXY(Object[num].LeftSide[0].X + 1,Object[num].LeftSide[0].Y);
-	brown(3);
+		writeToBuffer(Object[num].Area[1][0],"   ",brown);
 	}
 
 	if (Object[num].RenderTime > 1)
 	{
-	gotoXY(Object[num].LeftSide[1]);
-	brown(5);
+		writeToBuffer(Object[num].Area[0][1],"     ",brown);
 	}
 
 	if (Object[num].RenderTime > 2)
 	{
-	gotoXY(Object[num].LeftSide[2]);
-	brown(5);
+		writeToBuffer(Object[num].Area[0][2],"     ",brown);
 	}
 
 	if (Object[num].RenderTime > 3)
 	{
-	gotoXY(Object[num].LeftSide[3]);
-	brown(1);
-	white(1);
-	brown(3);
+		writeToBuffer(Object[num].Area[0][3]," ",brown);
+		writeToBuffer(Object[num].Area[1][3]," ",white);
+		writeToBuffer(Object[num].Area[2][3],"   ",brown);
 	}
 
 	if (Object[num].RenderTime > 4)
 	{
-	gotoXY(Object[num].LeftSide[4].X + 1,Object[num].LeftSide[4].Y);
-	brown(3);
+		writeToBuffer(Object[num].Area[1][4],"   ",brown);
 	}
 
 	if (Object[num].RenderTime > 5)
 	{
-	gotoXY(Object[num].LeftSide[5].X + 2,Object[num].LeftSide[5].Y);
-	d_green(3);
+		writeToBuffer(Object[num].Area[2][5],"   ",d_green);
 	}
 
 	if (Object[num].RenderTime > 6)
 	{
-	gotoXY(Object[num].LeftSide[6].X + 3,Object[num].LeftSide[6].Y);
-	d_green(2);
+		writeToBuffer(Object[num].Area[3][6],"  ",d_green);
 	}
 }
 
@@ -399,47 +242,40 @@ void Render_Pear(int num)
 {
 	if (Object[num].RenderTime > 0)
 	{
-	gotoXY(Object[num].LeftSide[0].X + 1,Object[num].LeftSide[0].Y);
-	green(3);
+		writeToBuffer(Object[num].Area[1][0],"   ",green);
 	}
 	
 	if (Object[num].RenderTime > 1)
 	{
-	gotoXY(Object[num].LeftSide[1]);
-	green(5);
+		writeToBuffer(Object[num].Area[0][1],"     ",green);
 	}
 
 	if (Object[num].RenderTime > 2)
 	{
-	gotoXY(Object[num].LeftSide[2]);
-	green(1);
-	white(1);
-	green(3);
+		writeToBuffer(Object[num].Area[0][2]," ",green);
+		writeToBuffer(Object[num].Area[1][2]," ",white);
+		writeToBuffer(Object[num].Area[2][2],"   ",green);
 	}
 
 	if (Object[num].RenderTime > 3)
 	{
-	gotoXY(Object[num].LeftSide[3].X + 1,Object[num].LeftSide[3].Y);
-	green(3);
+		writeToBuffer(Object[num].Area[1][3],"   ",green);
 	}
 
 	if (Object[num].RenderTime > 4)
 	{
-	gotoXY(Object[num].LeftSide[4].X + 1,Object[num].LeftSide[4].Y);
-	green(3);
+		writeToBuffer(Object[num].Area[1][4],"   ",green);
 	}
 
 	if (Object[num].RenderTime > 5)
 	{
-	gotoXY(Object[num].LeftSide[5].X + 2,Object[num].LeftSide[5].Y);
-	green(1);
-	d_green(2);
+		writeToBuffer(Object[num].Area[2][5]," ",green);
+		writeToBuffer(Object[num].Area[3][5],"  ",d_green);
 	}
 
 	if (Object[num].RenderTime > 6)
 	{
-	gotoXY(Object[num].LeftSide[6].X + 2,Object[num].LeftSide[6].Y);
-	d_green(2);
+		writeToBuffer(Object[num].Area[2][6],"  ",d_green);
 	}
 }
 
@@ -447,167 +283,124 @@ void Render_Pineapple(int num)
 {
 	if (Object[num].RenderTime > 0)
 	{
-	gotoXY(Object[num].LeftSide[0].X + 1,Object[num].LeftSide[0].Y);
-	brown(1);
-	yellow(1);
-	brown(1);
+		writeToBuffer(Object[num].Area[1][0]," ",brown);
+		writeToBuffer(Object[num].Area[2][0]," ",yellow);
+		writeToBuffer(Object[num].Area[3][0]," ",brown);
 	}
 	
 	if (Object[num].RenderTime > 1)
 	{
-	gotoXY(Object[num].LeftSide[1].X + 1,Object[num].LeftSide[1].Y);
-	yellow(1);
-	brown(1);
-	yellow(1);
+		writeToBuffer(Object[num].Area[1][1]," ",yellow);
+		writeToBuffer(Object[num].Area[2][1]," ",brown);
+		writeToBuffer(Object[num].Area[3][1]," ",yellow);
 	}
 
 	if (Object[num].RenderTime > 2)
 	{
-	gotoXY(Object[num].LeftSide[2].X + 1,Object[num].LeftSide[2].Y);
-	brown(1);
-	yellow(1);
-	brown(1);
+		writeToBuffer(Object[num].Area[1][2]," ",brown);
+		writeToBuffer(Object[num].Area[2][2]," ",yellow);
+		writeToBuffer(Object[num].Area[3][2]," ",brown);
 	}
 
 	if (Object[num].RenderTime > 3)
 	{
-	gotoXY(Object[num].LeftSide[3].X + 1,Object[num].LeftSide[3].Y);
-	yellow(1);
-	brown(1);
-	yellow(1);
+		writeToBuffer(Object[num].Area[1][3]," ",yellow);
+		writeToBuffer(Object[num].Area[2][3]," ",brown);
+		writeToBuffer(Object[num].Area[3][3]," ",yellow);
 	}
 
 	if (Object[num].RenderTime > 4)
 	{
-	gotoXY(Object[num].LeftSide[4].X + 2,Object[num].LeftSide[4].Y);
-	d_green(1);
+		writeToBuffer(Object[num].Area[2][4]," ",d_green);
 	}
 
 	if (Object[num].RenderTime > 5)
 	{
-	gotoXY(Object[num].LeftSide[5].X + 1,Object[num].LeftSide[5].Y);
-	d_green(1);
-	gotoXY(Object[num].LeftSide[5].X + 3,Object[num].LeftSide[5].Y);
-	d_green(1);
+		writeToBuffer(Object[num].Area[1][5]," ",d_green);
+		writeToBuffer(Object[num].Area[3][5]," ",d_green);
 	}
 	
 	if (Object[num].RenderTime > 6)
 	{
-	gotoXY(Object[num].LeftSide[6]);
-	d_green(1);
-	gotoXY(Object[num].LeftSide[6].X + 2,Object[num].LeftSide[6].Y);
-	d_green(1);
-	gotoXY(Object[num].LeftSide[6].X + 4,Object[num].LeftSide[6].Y);
-	d_green(1);
+		writeToBuffer(Object[num].Area[0][6]," ",d_green);
+		writeToBuffer(Object[num].Area[2][6]," ",d_green);
+		writeToBuffer(Object[num].Area[4][6]," ",d_green);
 	}
 }
+
 
 //Jenny : Render Man
 void Render_Man()
 {
-	gotoXY(charLocation.X, charLocation.Y-11);
-	grey(1);
-	gotoXY(charLocation.X+10, charLocation.Y-11);
-	grey(1);
+	writeToBuffer(charArea[0][11]," ",grey);
+	writeToBuffer(charArea[10][11]," ",grey);
 	
-	gotoXY(charLocation.X, charLocation.Y-10);
-	grey(1);
-	gotoXY(charLocation.X+10, charLocation.Y-10);
-	grey(1);
-	
-	gotoXY(charLocation.X, charLocation.Y-9);
-	grey(11);
+	writeToBuffer(charArea[0][10]," ",grey);
+	writeToBuffer(charArea[10][10]," ",grey);
 
-	gotoXY(charLocation.X, charLocation.Y-8);
-	d_red(1);
-	grey(9);
+	writeToBuffer(charArea[0][9],"           ",grey);
+
+	writeToBuffer(charArea[0][8]," ",d_red);
+	writeToBuffer(charArea[1][8],"         ",grey);
 	
 	//Head
-	gotoXY(charLocation.X, charLocation.Y-7);
-	d_red(2);
-	gotoXY(charLocation.X+3, charLocation.Y-7);
-	d_red(5);
+	writeToBuffer(charArea[0][7],"  ",d_red);
+	writeToBuffer(charArea[3][7],"     ",d_red);
 	
-	gotoXY(charLocation.X+1, charLocation.Y-6);
-	d_red(1);
-	gotoXY(charLocation.X+3, charLocation.Y-6);
-	d_red(1);
-	black(1);
-	d_red(1);
-	black(1);
-	d_red(1);
+	writeToBuffer(charArea[1][6]," ",d_red);
+	writeToBuffer(charArea[3][6]," ",d_red);
+	writeToBuffer(charArea[4][6]," ",black);
+	writeToBuffer(charArea[5][6]," ",d_red);
+	writeToBuffer(charArea[6][6]," ",black);
+	writeToBuffer(charArea[7][6]," ",d_red);
 
-	gotoXY(charLocation.X+1, charLocation.Y-5);
-	d_red(1);
-	gotoXY(charLocation.X+3, charLocation.Y-5);
-	d_red(1);
-	black(1);
-	d_red(1);
-	black(1);
-	d_red(1);
+	writeToBuffer(charArea[1][5]," ",d_red);
+	writeToBuffer(charArea[3][5]," ",d_red);
+	writeToBuffer(charArea[4][5]," ",black);
+	writeToBuffer(charArea[5][5]," ",d_red);
+	writeToBuffer(charArea[6][5]," ",black);
+	writeToBuffer(charArea[7][5]," ",d_red);
+	
+	writeToBuffer(charArea[1][4]," ",d_red);
+	writeToBuffer(charArea[2][4]," ",blue);
+	writeToBuffer(charArea[3][4]," ",pink);
+	writeToBuffer(charArea[4][4],"   ",d_red);
+	writeToBuffer(charArea[7][4]," ",pink);
+	writeToBuffer(charArea[8][4]," ",blue);
+	writeToBuffer(charArea[9][4]," ",d_red);
 
-	gotoXY(charLocation.X+1, charLocation.Y-4);
-	d_red(1);
-	blue(1);
-	pink(1);
-	d_red(3);
-	pink(1);
-	blue(1);
-	d_red(1);
-
-	gotoXY(charLocation.X+1, charLocation.Y-3);
-	d_red(1);
-	blue(1);
-	d_red(2);
-	red(1);
-	d_red(2);
-	blue(1);
-	d_red(1);
+	writeToBuffer(charArea[1][3]," ",d_red);
+	writeToBuffer(charArea[2][3]," ",blue);
+	writeToBuffer(charArea[3][3],"  ",d_red);
+	writeToBuffer(charArea[5][3]," ",red);
+	writeToBuffer(charArea[6][3],"  ",d_red);
+	writeToBuffer(charArea[8][3]," ",blue);
+	writeToBuffer(charArea[9][3]," ",d_red);
 	
 	//Shirt
-	gotoXY(charLocation.X+3, charLocation.Y-2);
-	blue(5);
-
-	gotoXY(charLocation.X+9, charLocation.Y-2);
-	d_red(1);
+	writeToBuffer(charArea[3][2],"     ",blue);
+	writeToBuffer(charArea[9][2]," ",d_red);
 	
 	//Pants
-	gotoXY(charLocation.X+4, charLocation.Y-1);
-	black(3);
-
-	gotoXY(charLocation.X+9, charLocation.Y-1);
-	d_red(2);
+	writeToBuffer(charArea[4][1],"   ",black);
+	writeToBuffer(charArea[9][1],"  ",d_red);
 
 	//Feet
-	gotoXY(charLocation.X+3, charLocation.Y);
-	d_red(2);
-
-	gotoXY(charLocation.X+6, charLocation.Y);
-	d_red(2);
+	writeToBuffer(charArea[3][0],"  ",d_red);
+	writeToBuffer(charArea[6][0],"  ",d_red);
 }
 
 //Jenny : Render Rat
 void Render_Rat()
 {
-	gotoXY(Rat.Location.X, Rat.Location.Y-4);
-	grey(2);
-	gotoXY(Rat.Location.X+3, Rat.Location.Y-4);
-	grey(2);
-
-	gotoXY(Rat.Location.X, Rat.Location.Y-3);
-	pink(1);
-	grey(3);
-	pink(1);
-
-	gotoXY(Rat.Location.X+1, Rat.Location.Y-2);
-	black(1);
-	grey(1);
-	black(1);
-
-	gotoXY(Rat.Location.X+1, Rat.Location.Y-1);
-	grey(3);
-
-	gotoXY(Rat.Location.X +2, Rat.Location.Y);
-	black(1);
-
+	writeToBuffer(Rat.Area[2][0]," ",black);
+	writeToBuffer(Rat.Area[1][1],"   ",grey);
+	writeToBuffer(Rat.Area[1][2]," ",black);
+	writeToBuffer(Rat.Area[2][2]," ",grey);
+	writeToBuffer(Rat.Area[3][2]," ",black);
+	writeToBuffer(Rat.Area[0][3]," ",pink);
+	writeToBuffer(Rat.Area[1][3],"   ",grey);
+	writeToBuffer(Rat.Area[4][3]," ",pink);
+	writeToBuffer(Rat.Area[0][4],"  ",grey);
+	writeToBuffer(Rat.Area[3][4],"  ",grey);
 }

@@ -88,7 +88,7 @@ int LevelCounter = 0;
 int Lv_Time_Min;
 int Lv_Time_Sec;
 bool Timer_Set = false; //Sets when to reset the timer
-int Timer_Active = 5; //Set to number of FPS
+int Timer_Active = 100; //Set to number of FPS
 int Timer_Reset = Timer_Active;
 
 //Shannon : Increase Level at certain requirements
@@ -199,13 +199,8 @@ void updateDifficulty()
 	randomizer = 100; //this will always be 100
 	if (levelDifficulty == EASY)
 	{
-		appleChance = 30;
-		bombChance = 20;
-		cherryChance = 15;
-		bananaChance = 15;
-		orangeChance = 8;
-		pearChance = 7;
-		pineappleChance = 5;
+		pearChance = 50;
+		pineappleChance = 50;
 
 		fallSpeed = 1;
 		if (Timer_Set == false)

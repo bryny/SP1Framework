@@ -8,14 +8,19 @@
 #include <iomanip>
 
 //Objects Variable Declarations
+
+//Shannon : Maximum Object's Size
+const int Length = 7;
+const int Height = 7;
+
 struct Type //Shannon : Objects' Struct System
 {
 	COORD Location; //Starting location to base render around
-	COORD LeftSide[7];
-	COORD RightSide[7];
+	COORD Area[Length][Height]; //Area is x by y based on largest object - Cherry 
+	int Length; //As objects vary only in length, another length value is used for each object.
 	int RenderTime; //Timer to render each row of the object
-	int State;
-	int id;
+	int State; //State whether the Object is in play or not
+	int id; //Identify what type of Object it is
 };
 enum ObjectState //Shannon : State of Objects
 {
