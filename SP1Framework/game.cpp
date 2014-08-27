@@ -189,6 +189,7 @@ void render()
     // render time taken to calculate this frame
 	COORD F_P_S = {70,0};
 	std::string FPS_String = std::to_string(static_cast<long double>(1.0 / deltaTime)) + "fps";
+	
 
 
 	writeToBuffer(F_P_S,FPS_String);
@@ -219,10 +220,10 @@ void render()
 
 	//Shannon : Render Level System
 	RenderLevel();
-
+	*/
 	//Shannon : Render Level Timer
 	RenderLvTimer();
-	*/
+	
 	// Writes the buffer to the console, hence you will see what you have written
     flushBufferToConsole();
 }

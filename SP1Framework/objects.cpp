@@ -332,11 +332,10 @@ void UpdateRat()
 void RenderObjects()
 {
 	// Shannon : Render objects if created
-	for (int i = 0; i < TotalLimit; ++i)
+	for (int i = 0; i < TotalLimit; ++i)	
 	{
 		if (Object[i].State == CREATED)
 		{
-			gotoXY(Object[i].Location);
 			if (Object[i].id == APPLE)
 			{
 				Render_Apple(i);
@@ -359,7 +358,7 @@ void RenderObjects()
 			}
 			else if (Object[i].id == PEAR)
 			{
-				Render_Pear(i);
+				//Render_Pear(i);
 			}
 			else if (Object[i].id == PINEAPPLE)
 			{
@@ -370,7 +369,6 @@ void RenderObjects()
 	// Shannon : Render Rat if created
 	if (Rat.State == CREATED)
 	{
-		gotoXY(Rat.Location);
 		Render_Rat();
 	}
 }

@@ -206,7 +206,7 @@ void updateDifficulty()
 		if (Timer_Set == false)
 		{
 		Lv_Time_Min = 2;
-		Lv_Time_Sec = 30;
+		Lv_Time_Sec = 00;
 		Timer_Set = true;
 		}
 	}
@@ -261,6 +261,7 @@ void updateDifficulty()
 }
 
 //Shannon : Countdown Timer
+COORD TimerLocation = {ConsoleSize.X/2 - 2,0};
 void UpdateLvTimer()
 {
 	
@@ -313,7 +314,6 @@ void RenderLevel()
 //Shannon : Display Countdown Timer
 void RenderLvTimer()
 {
-	gotoXY(ConsoleSize.X/2 - 2,0);
-	colour(0x0C);
-	std::cout << Lv_Time_Min << ":" << Lv_Time_Sec;
+	std::string Timer= std::to_string(static_cast<long long>(Lv_Time_Min)) + ":" + std::to_string(static_cast<long long>(Lv_Time_Sec));
+	writeToBuffer(TimerLocation,Timer,0x0C);
 }
