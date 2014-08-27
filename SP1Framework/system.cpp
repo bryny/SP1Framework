@@ -199,8 +199,7 @@ void updateDifficulty()
 	randomizer = 100; //this will always be 100
 	if (levelDifficulty == EASY)
 	{
-		pearChance = 50;
-		pineappleChance = 50;
+		pearChance = 100;
 
 		fallSpeed = 1;
 		if (Timer_Set == false)

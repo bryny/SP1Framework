@@ -35,7 +35,7 @@ void ImplementObjects()
 
 	// Shannon : Implement Rat
 	Rat.State = UNCREATED;
-	Rat.Location.Y = charLocation.Y;
+	Rat.Location.Y = charLocation.Y - 4;
 	Rat.Location.X = 0;
 
 	xyz = 0;
@@ -69,7 +69,7 @@ void UpdateObjects()
 			{
 				xyz = 5;
 				//Shannon : Collision Detection , Prevent objects from spawning in collision range of previous objects
-				while (ObjectStart.X < Object[Number-1].Area[0][Object[Number-1].Length].X && ObjectStart.X > Object[Number-1].Location.X - 7)
+				while (ObjectStart.X < Object[Number-1].Location.X + 7 && ObjectStart.X > Object[Number-1].Location.X - 7)
 				{
 					ObjectStart.X = rand() % 50; //Shannon : Re-Randomize if colliding
 				}
@@ -86,100 +86,30 @@ void UpdateObjects()
 				if (ObjectChance <= appleChance)
 				{
 					Object[Number].id = APPLE;
-					Object[Number].Length = 5;
-					//Shannon : Create all of Object's Coordinates
-					for (int x_value = 0; x_value < Object[Number].Length; ++x_value)
-					{
-						for (int y_value = 0; y_value < Height; ++y_value)
-						{
-							Object[Number].Area[x_value][y_value].X = Object[Number].Location.X + x_value;
-							Object[Number].Area[x_value][y_value].Y = Object[Number].Location.Y - y_value;
-						}
-					}
 				}
 				else if (ObjectChance <= appleChance + bombChance)
 				{
 					Object[Number].id = BOMB;
-					Object[Number].Length = 5;
-					//Shannon : Create all of Object's Coordinates
-					for (int x_value = 0; x_value < Object[Number].Length; ++x_value)
-					{
-						for (int y_value = 0; y_value < Height; ++y_value)
-						{
-							Object[Number].Area[x_value][y_value].X = Object[Number].Location.X + x_value;
-							Object[Number].Area[x_value][y_value].Y = Object[Number].Location.Y - y_value;
-						}
-					}
 				}
 				else if (ObjectChance < appleChance + bombChance + cherryChance)
 				{
 					Object[Number].id = CHERRY;
-					Object[Number].Length = 7;
-					//Shannon : Create all of Object's Coordinates
-					for (int x_value = 0; x_value < Object[Number].Length; ++x_value)
-					{
-						for (int y_value = 0; y_value < Height; ++y_value)
-						{
-							Object[Number].Area[x_value][y_value].X = Object[Number].Location.X + x_value;
-							Object[Number].Area[x_value][y_value].Y = Object[Number].Location.Y - y_value;
-						}
-					}
 				}
 				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance)
 				{
 					Object[Number].id = BANANA;
-					Object[Number].Length = 6;
-					//Shannon : Create all of Object's Coordinates
-					for (int x_value = 0; x_value < Object[Number].Length; ++x_value)
-					{
-						for (int y_value = 0; y_value < Height; ++y_value)
-						{
-							Object[Number].Area[x_value][y_value].X = Object[Number].Location.X + x_value;
-							Object[Number].Area[x_value][y_value].Y = Object[Number].Location.Y - y_value;
-						}
-					}
 				}
 				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance)
 				{
 					Object[Number].id = ORANGE;
-					Object[Number].Length = 5;
-					//Shannon : Create all of Object's Coordinates
-					for (int x_value = 0; x_value < Object[Number].Length; ++x_value)
-					{
-						for (int y_value = 0; y_value < Height; ++y_value)
-						{
-							Object[Number].Area[x_value][y_value].X = Object[Number].Location.X + x_value;
-							Object[Number].Area[x_value][y_value].Y = Object[Number].Location.Y - y_value;
-						}
-					}
 				}
 				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance + pearChance)
 				{
 					Object[Number].id = PEAR;
-					Object[Number].Length = 5;
-					//Shannon : Create all of Object's Coordinates
-					for (int x_value = 0; x_value < Object[Number].Length; ++x_value)
-					{
-						for (int y_value = 0; y_value < Height; ++y_value)
-						{
-							Object[Number].Area[x_value][y_value].X = Object[Number].Location.X + x_value;
-							Object[Number].Area[x_value][y_value].Y = Object[Number].Location.Y - y_value;
-						}
-					}
 				}
 				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance + pearChance + pineappleChance)
 				{
 					Object[Number].id = PINEAPPLE;
-					Object[Number].Length = 5;
-					//Shannon : Create all of Object's Coordinates
-					for (int x_value = 0; x_value < Object[Number].Length; ++x_value)
-					{
-						for (int y_value = 0; y_value < Height; ++y_value)
-						{
-							Object[Number].Area[x_value][y_value].X = Object[Number].Location.X + x_value;
-							Object[Number].Area[x_value][y_value].Y = Object[Number].Location.Y - y_value;
-						}
-					}
 				}
 				++Number;
 			} //Shannon : End of Object Creation
@@ -202,13 +132,6 @@ void UpdateObjects()
 			{
 				if (Object[ii].Location.Y < ConsoleSize.Y - 1)
 				{
-					for (int x_value = 0; x_value < Object[ii].Length; ++x_value)
-					{
-						for (int y_value = 0; y_value < Height; ++y_value)
-						{
-							Object[ii].Area[x_value][y_value].Y += fallSpeed;
-						}
-					}
 					Object[ii].Location.Y += fallSpeed;
 					++Object[ii].RenderTime;
 				}
@@ -287,26 +210,11 @@ void UpdateRat()
 		if (RatChance <= 5)
 		{
 			Rat.State = CREATED;
-			for (int x_value = 0; x_value < 5; ++x_value)
-			{
-				for (int y_value = 0; y_value < 5; ++y_value)
-				{
-					Rat.Area[x_value][y_value].X = Rat.Location.X + x_value;
-					Rat.Area[x_value][y_value].Y = Rat.Location.Y - y_value;
-				}
-			}
 		}
 	}
 	//Shannon : If Rat is created, it will move to the other side of the screen
 	if (Rat.State == CREATED && Rat.Location.X != ConsoleSize.X - 1)
 	{
-		for (int x_value = 0; x_value < 5; ++x_value)
-			{
-				for (int y_value = 0; y_value < 5; ++y_value)
-				{
-					++Rat.Area[x_value][y_value].X;
-				}
-			}
 		++Rat.Location.X;
 	}
 	//Shannon : If the Rat touches the player, lose score and Rat disappears
@@ -358,7 +266,7 @@ void RenderObjects()
 			}
 			else if (Object[i].id == PEAR)
 			{
-				//Render_Pear(i);
+				Render_Pear(i);
 			}
 			else if (Object[i].id == PINEAPPLE)
 			{

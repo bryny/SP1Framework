@@ -22,309 +22,145 @@ WORD red = 192;
 WORD pink = 208;
 WORD yellow = 224;
 WORD white = 240;
+COORD C;
+WORD Apple[35] = 
+	{16,16,16,192,192,192,16, //1st column
+	 16,16,192,240,192,192,192, //2nd column
+	 16,32,192,192,192,192,192, //3rd column
+	 32, 32, 192, 192, 192, 192, 192, //4th column
+	 32, 32, 16, 192, 192, 192, 16}; //5th column
+WORD Bomb[35] =
+	{16,16,16,0,0,0,16,
+	 16,16,0,240,0,0,0,
+	 192,192,0,0,0,0,0,
+	 96,16,0,0,0,0,0,
+	 16,224,16,0,0,0,16};
+WORD Cherry[49] =
+	{16,32,32,16,192,192,192,
+	 32,32,16,16,64,192,192,
+	 32,16,16,64,192,192,192,
+	 16,64,64,16,16,16,16,
+	 32,16,16,64,192,192,192,
+	 32,32,16,16,64,192,192,
+	 16,32,32,16,192,192,192};
+WORD Banana[42] =
+	{16,16,16,16,16,96,16,
+	 16,16,16,16,16,224,16,
+	 16,16,16,16,16,224,244,
+	 96,16,16,16,224,224,224,
+	 96,224,224,224,224,224,224,
+	 96,16,224,224,224,224,16};
+WORD Orange[35] = 
+	{16,16,16,96,96,96,16, //1st column
+	 16,16,96,240,96,96,96, //2nd column
+	 16,32,96,96,96,96,96, //3rd column
+	 32, 32, 96, 96, 96, 96, 96, //4th column
+	 32, 32, 16, 96, 96, 96, 16}; //5th column
+WORD Pear[35] = {16,16,16,16,160,160,16,16,16,160,160,240,160,160,32,160,160,160,160,160,160,32,32,160,160,160,160,160,16,32,16,16,160,160,16};
+WORD Pineapple[35] =
+	{32,16,16,16,16,16,16,
+	 16,32,16,224,96,224,96,
+	 32,16,32,96,224,96,224,
+	 16,32,16,224,96,224,96,
+	 32,16,16,16,16,16,16};
+WORD RatColour[25] = 
+	{112,208,16,16,16,
+	 112,112,0,112,16,
+	 16,112,112,112,0,
+	 112,112,0,112,16,
+	 112,208,16,16,16};
 
 //Shannon : Final Render
 
 //Shannon : Render objects from bottom to top
 void Render_Apple(int num)
 {
-	if (Object[num].RenderTime > 0)
+	for (int x = 0; x < 5; ++x)
 	{
-		writeToBuffer(Object[num].Area[1][0],"   ",red);
-	}
-	
-	if (Object[num].RenderTime > 1)
-	{
-		writeToBuffer(Object[num].Area[0][1],"     ",red);
-	}
-
-	if (Object[num].RenderTime > 2)
-	{
-		writeToBuffer(Object[num].Area[0][2],"     ",red);
-	}
-
-	if (Object[num].RenderTime > 3)
-	{
-		writeToBuffer(Object[num].Area[0][3]," ",red);
-		writeToBuffer(Object[num].Area[1][3]," ",white);
-		writeToBuffer(Object[num].Area[2][3],"   ",red);
-	}
-
-	if (Object[num].RenderTime > 4)
-	{
-		writeToBuffer(Object[num].Area[1][4],"   ",red);
-	}
-
-	if (Object[num].RenderTime > 5)
-	{
-		writeToBuffer(Object[num].Area[2][5],"   ",d_green);
-	}
-
-	if (Object[num].RenderTime > 6)
-	{
-		writeToBuffer(Object[num].Area[3][6],"  ",d_green);
+		for (int y = 0; y < 7; ++y)
+		{
+			C.X = Object[num].Location.X + x;
+			C.Y = Object[num].Location.Y + y;
+			writeToBuffer(C," ",Apple[7*x+y]);
+		}
 	}
 }
 
 void Render_Bomb(int num)
 {
-	if (Object[num].RenderTime > 0)
+	for (int x = 0; x < 5; ++x)
 	{
-		writeToBuffer(Object[num].Area[1][0],"   ",black);
-	}
-
-	if (Object[num].RenderTime > 1)
-	{
-		writeToBuffer(Object[num].Area[0][1],"     ",black);
-	}
-
-	if (Object[num].RenderTime > 2)
-	{
-		writeToBuffer(Object[num].Area[0][2],"     ",black);
-	}
-
-	if (Object[num].RenderTime > 3)
-	{
-		writeToBuffer(Object[num].Area[0][3]," ",black);
-		writeToBuffer(Object[num].Area[1][3]," ",white);
-		writeToBuffer(Object[num].Area[2][3],"   ",black);
-	}
-
-	if (Object[num].RenderTime > 4)
-	{
-		writeToBuffer(Object[num].Area[1][4],"   ",black);
-	}
-
-	if (Object[num].RenderTime > 5)
-	{
-		writeToBuffer(Object[num].Area[2][5]," ",red);
-		writeToBuffer(Object[num].Area[4][5]," ",yellow);
-	}
-
-	if (Object[num].RenderTime > 6)
-	{
-		writeToBuffer(Object[num].Area[2][6]," ",red);
-		writeToBuffer(Object[num].Area[3][6]," ",brown);
+		for (int y = 0; y < 7; ++y)
+		{
+			C.X = Object[num].Location.X + x;
+			C.Y = Object[num].Location.Y + y;
+			writeToBuffer(C," ",Bomb[7*x+y]);
+		}
 	}
 }
 
 void Render_Cherry(int num)
 {
-	if (Object[num].RenderTime > 0)
+	for (int x = 0; x < 7; ++x)
 	{
-		writeToBuffer(Object[num].Area[0][0],"   ",red);
-		writeToBuffer(Object[num].Area[4][0],"   ",red);
-	}
-	
-	if (Object[num].RenderTime > 1)
-	{
-		writeToBuffer(Object[num].Area[0][1],"   ",red);
-		writeToBuffer(Object[num].Area[4][1],"   ",red);
-	}
-
-	if (Object[num].RenderTime > 2)
-	{
-		writeToBuffer(Object[num].Area[0][2]," ",red);
-		writeToBuffer(Object[num].Area[1][2]," ",d_red);
-		writeToBuffer(Object[num].Area[2][2]," ",red);
-		writeToBuffer(Object[num].Area[4][2]," ",red);
-		writeToBuffer(Object[num].Area[5][2]," ",d_red);
-		writeToBuffer(Object[num].Area[6][2]," ",red);
-	}
-
-	if (Object[num].RenderTime > 3)
-	{
-		writeToBuffer(Object[num].Area[2][3]," ",d_red);
-		writeToBuffer(Object[num].Area[4][3]," ",d_red);
-	}
-
-	if (Object[num].RenderTime > 4)
-	{
-		writeToBuffer(Object[num].Area[0][4]," ",d_green);
-		writeToBuffer(Object[num].Area[3][4]," ",d_red);
-		writeToBuffer(Object[num].Area[6][4]," ",d_green);
-	}
-
-	if (Object[num].RenderTime > 5)
-	{
-		writeToBuffer(Object[num].Area[0][5],"  ",d_green);
-		writeToBuffer(Object[num].Area[3][5]," ",d_red);
-		writeToBuffer(Object[num].Area[5][5],"  ",d_green);
-	}
-
-	if (Object[num].RenderTime > 6)
-	{
-		writeToBuffer(Object[num].Area[1][6],"  ",d_green);
-		writeToBuffer(Object[num].Area[4][6],"  ",d_green);
+		for (int y = 0; y < 7; ++y)
+		{
+			C.X = Object[num].Location.X + x;
+			C.Y = Object[num].Location.Y + y;
+			writeToBuffer(C, " ", Cherry[7*x+y]);
+		}
 	}
 }
 
 void Render_Banana(int num)
 {
-	if (Object[num].RenderTime > 0)
+	for (int x = 0; x < 6; ++x)
 	{
-		writeToBuffer(Object[num].Area[2][0],"   ",yellow);
-	}
-	
-	if (Object[num].RenderTime > 1)
-	{
-		writeToBuffer(Object[num].Area[0][1]," ",brown);
-		writeToBuffer(Object[num].Area[1][1],"     ",yellow);
-	}
-
-	if (Object[num].RenderTime > 2)
-	{
-		writeToBuffer(Object[num].Area[3][2],"   ",yellow);
-	}
-
-	if (Object[num].RenderTime > 3)
-	{
-		writeToBuffer(Object[num].Area[4][3],"  ",yellow);
-	}
-
-	if (Object[num].RenderTime > 4)
-	{
-		writeToBuffer(Object[num].Area[4][4],"  ",yellow);
-	}
-
-	if (Object[num].RenderTime > 5)
-	{
-		writeToBuffer(Object[num].Area[4][5]," ",yellow);
-	}
-
-	if (Object[num].RenderTime > 6)
-	{
-		writeToBuffer(Object[num].Area[3][6],"   ",brown);
+		for (int y = 0; y < 7; ++y)
+		{
+			C.X = Object[num].Location.X + x;
+			C.Y = Object[num].Location.Y + y;
+			writeToBuffer(C," ",Banana[7*x+y]);
+		}
 	}
 }
 
 void Render_Orange(int num)
 {
-	if (Object[num].RenderTime > 0)
+	for (int x = 0; x < 5; ++x)
 	{
-		writeToBuffer(Object[num].Area[1][0],"   ",brown);
-	}
-
-	if (Object[num].RenderTime > 1)
-	{
-		writeToBuffer(Object[num].Area[0][1],"     ",brown);
-	}
-
-	if (Object[num].RenderTime > 2)
-	{
-		writeToBuffer(Object[num].Area[0][2],"     ",brown);
-	}
-
-	if (Object[num].RenderTime > 3)
-	{
-		writeToBuffer(Object[num].Area[0][3]," ",brown);
-		writeToBuffer(Object[num].Area[1][3]," ",white);
-		writeToBuffer(Object[num].Area[2][3],"   ",brown);
-	}
-
-	if (Object[num].RenderTime > 4)
-	{
-		writeToBuffer(Object[num].Area[1][4],"   ",brown);
-	}
-
-	if (Object[num].RenderTime > 5)
-	{
-		writeToBuffer(Object[num].Area[2][5],"   ",d_green);
-	}
-
-	if (Object[num].RenderTime > 6)
-	{
-		writeToBuffer(Object[num].Area[3][6],"  ",d_green);
+		for (int y = 0; y < 7; ++y)
+		{
+			C.X = Object[num].Location.X + x;
+			C.Y = Object[num].Location.Y + y;
+			writeToBuffer(C," ",Orange[7*x+y]);
+		}
 	}
 }
 
 void Render_Pear(int num)
 {
-	if (Object[num].RenderTime > 0)
+	for (int x = 0; x < 5; ++x)
 	{
-		writeToBuffer(Object[num].Area[1][0],"   ",green);
-	}
-	
-	if (Object[num].RenderTime > 1)
-	{
-		writeToBuffer(Object[num].Area[0][1],"     ",green);
-	}
-
-	if (Object[num].RenderTime > 2)
-	{
-		writeToBuffer(Object[num].Area[0][2]," ",green);
-		writeToBuffer(Object[num].Area[1][2]," ",white);
-		writeToBuffer(Object[num].Area[2][2],"   ",green);
-	}
-
-	if (Object[num].RenderTime > 3)
-	{
-		writeToBuffer(Object[num].Area[1][3],"   ",green);
-	}
-
-	if (Object[num].RenderTime > 4)
-	{
-		writeToBuffer(Object[num].Area[1][4],"   ",green);
-	}
-
-	if (Object[num].RenderTime > 5)
-	{
-		writeToBuffer(Object[num].Area[2][5]," ",green);
-		writeToBuffer(Object[num].Area[3][5],"  ",d_green);
-	}
-
-	if (Object[num].RenderTime > 6)
-	{
-		writeToBuffer(Object[num].Area[2][6],"  ",d_green);
+		for (int y = 0; y < 7; ++y)
+		{
+			C.X = Object[num].Location.X + x;
+			C.Y = Object[num].Location.Y + y;
+			writeToBuffer(C," ",Pear[7*x+y]);
+		}
 	}
 }
 
 void Render_Pineapple(int num)
 {
-	if (Object[num].RenderTime > 0)
+	for (int x = 0; x < 5; ++x)
 	{
-		writeToBuffer(Object[num].Area[1][0]," ",brown);
-		writeToBuffer(Object[num].Area[2][0]," ",yellow);
-		writeToBuffer(Object[num].Area[3][0]," ",brown);
-	}
-	
-	if (Object[num].RenderTime > 1)
-	{
-		writeToBuffer(Object[num].Area[1][1]," ",yellow);
-		writeToBuffer(Object[num].Area[2][1]," ",brown);
-		writeToBuffer(Object[num].Area[3][1]," ",yellow);
-	}
-
-	if (Object[num].RenderTime > 2)
-	{
-		writeToBuffer(Object[num].Area[1][2]," ",brown);
-		writeToBuffer(Object[num].Area[2][2]," ",yellow);
-		writeToBuffer(Object[num].Area[3][2]," ",brown);
-	}
-
-	if (Object[num].RenderTime > 3)
-	{
-		writeToBuffer(Object[num].Area[1][3]," ",yellow);
-		writeToBuffer(Object[num].Area[2][3]," ",brown);
-		writeToBuffer(Object[num].Area[3][3]," ",yellow);
-	}
-
-	if (Object[num].RenderTime > 4)
-	{
-		writeToBuffer(Object[num].Area[2][4]," ",d_green);
-	}
-
-	if (Object[num].RenderTime > 5)
-	{
-		writeToBuffer(Object[num].Area[1][5]," ",d_green);
-		writeToBuffer(Object[num].Area[3][5]," ",d_green);
-	}
-	
-	if (Object[num].RenderTime > 6)
-	{
-		writeToBuffer(Object[num].Area[0][6]," ",d_green);
-		writeToBuffer(Object[num].Area[2][6]," ",d_green);
-		writeToBuffer(Object[num].Area[4][6]," ",d_green);
+		for (int y = 0; y < 7; ++y)
+		{
+			C.X = Object[num].Location.X + x;
+			C.Y = Object[num].Location.Y + y;
+			writeToBuffer(C," ",Pineapple[7*x+y]);
+		}
 	}
 }
 
@@ -393,14 +229,13 @@ void Render_Man()
 //Jenny : Render Rat
 void Render_Rat()
 {
-	writeToBuffer(Rat.Area[2][0]," ",black);
-	writeToBuffer(Rat.Area[1][1],"   ",grey);
-	writeToBuffer(Rat.Area[1][2]," ",black);
-	writeToBuffer(Rat.Area[2][2]," ",grey);
-	writeToBuffer(Rat.Area[3][2]," ",black);
-	writeToBuffer(Rat.Area[0][3]," ",pink);
-	writeToBuffer(Rat.Area[1][3],"   ",grey);
-	writeToBuffer(Rat.Area[4][3]," ",pink);
-	writeToBuffer(Rat.Area[0][4],"  ",grey);
-	writeToBuffer(Rat.Area[3][4],"  ",grey);
+	for (int x = 0; x < 5; ++x)
+	{
+		for (int y = 0; y < 5; ++y)
+		{
+			C.X = Rat.Location.X + x;
+			C.Y = Rat.Location.Y + y;
+			writeToBuffer(C," ",RatColour[5*x+y]);
+		}
+	}
 }
