@@ -9,6 +9,7 @@
 #include <fstream>
 #include <string>
 
+/*
 using std :: string; 
 
 struct board
@@ -22,4 +23,5 @@ int Write(string fileName, highscore* pHS);
 void scoreboard();
 int playerScore;
 string enteredName;
+*/
 #endif

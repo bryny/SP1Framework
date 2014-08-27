@@ -6,7 +6,7 @@
 #include <iomanip>
 #include <fstream>
 
-
+/*
 int Read(string fileName, highscore* pHS)
 	{
 		ifstream myFile(fileName);
@@ -40,4 +40,4 @@ int Write(string fileName, highscore* pHS)
 		}
 		return i;
 	}
-
+	*/

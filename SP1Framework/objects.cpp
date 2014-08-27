@@ -162,7 +162,7 @@ void UpdateObjects()
 		{
 			if (Object[ii].State == CREATED)
 			{
-				if (Object[ii].Location.Y < consoleSize.Y - 1)
+				if (Object[ii].Location.Y < ConsoleSize.Y - 1)
 				{
 					Object[ii].Location.Y += fallSpeed;
 					for (int i = 0; i < 7; ++i)
@@ -179,7 +179,7 @@ void UpdateObjects()
 	for (int ii = 0; ii < TotalLimit; ++ii)
 	{
 		// Shannon : Objects are 'recycled' after touching player or bottom of screen
-		if (Object[ii].Location.Y == consoleSize.Y - 1)
+		if (Object[ii].Location.Y == ConsoleSize.Y - 1)
 		{
 			//Shannon : Bonus Level also counts objects that reach the bottom
 			if (Object[ii].id != BOMB && Object[ii].State == CREATED && MiniLevel == 4)
@@ -250,7 +250,7 @@ void UpdateRat()
 		}
 	}
 	//Shannon : If Rat is created, it will move to the other side of the screen
-	if (Rat.State == CREATED && Rat.Location.X != consoleSize.X - 1)
+	if (Rat.State == CREATED && Rat.Location.X != ConsoleSize.X - 1)
 	{
 		Rat.Location.X++;
 	}
@@ -265,7 +265,7 @@ void UpdateRat()
 		}
 	}
 	//Shannon : When it reaches the other side, it disappears
-	if (Rat.Location.X == consoleSize.X - 1)
+	if (Rat.Location.X == ConsoleSize.X - 1)
 	{
 		Rat.State = UNCREATED;
 		Rat.Location.X = 0;

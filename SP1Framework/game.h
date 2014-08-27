@@ -25,7 +25,7 @@ void render();              // renders the current state of the game to the cons
 void shutdown();            // do clean up, free memory
 
 extern COORD charLocation;
-extern COORD consoleSize;
+extern COORD ConsoleSize;
 
 
 #endif // _GAME_H

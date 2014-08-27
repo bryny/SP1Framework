@@ -10,8 +10,8 @@ void ImplementLife()
 	Life.Value = 3;
 	for (int i = 0; i < 3; ++i)
 	{
-		Life.Location[i].X = consoleSize.X - 2*(i+2);
-		Life.Location[i].Y = consoleSize.Y - 53;
+		Life.Location[i].X = ConsoleSize.X - 2*(i+2);
+		Life.Location[i].Y = ConsoleSize.Y - 53;
 	}
 }
 
@@ -71,7 +71,7 @@ void displayscore()
 		std::cout << "GAME OVER";
 
 		//Jenny : call for score.cpp
-		scoreboard();
+		//scoreboard();
 	}
 
 }
@@ -318,7 +318,7 @@ void RenderLevel()
 //Shannon : Display Countdown Timer
 void RenderLvTimer()
 {
-	gotoXY(consoleSize.X/2 - 2,0);
+	gotoXY(ConsoleSize.X/2 - 2,0);
 	colour(0x0C);
 	std::cout << Lv_Time_Min << ":" << Lv_Time_Sec;
 }

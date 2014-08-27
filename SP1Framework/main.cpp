@@ -19,7 +19,7 @@ int main()
 {
 	init();      // initialize your variables
     mainLoop();  // main loop
-	scoreboard();
+//	scoreboard();
     shutdown();  // do clean up, if any. free memory.
 	
 	return 0;
@@ -39,6 +39,7 @@ void mainLoop()
 	}    
 }
 
+/*
 void scoreboard()
 {
 	playerScore = score;
@@ -94,3 +95,4 @@ void scoreboard()
 
 
 }
+*/
