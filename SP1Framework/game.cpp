@@ -8,13 +8,19 @@
 #include "render.h"
 #include <iostream>   
 #include <iomanip>
+#include <sstream>
+
+// Console size, width by height
+COORD ConsoleSize = {80, 59};
 
 
 double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
+
+
+// Game specific variables here
 COORD charLocation;
-COORD consoleSize;
 
 //Shannon : Jump function
 enum jumpability
@@ -27,37 +33,24 @@ int jumptime = 5; //Shannon : Number of frames player will float after jumping
 void init()
 {
     // Set precision for floating point output
-    std::cout << std::fixed << std::setprecision(3);
+    elapsedTime = 0.0;
 
-	SetConsoleTitle(L"Fruit Bomb");
+    initConsole(ConsoleSize, "Fruit Bomb");
 
-	// Sets the console size, this is the biggest so far.
-	setConsoleSize(79, 58);
+    charLocation.X = (ConsoleSize.X - 10) / 2;
+    charLocation.Y = ConsoleSize.Y - 2;
 
-    // Get console width and height
-    CONSOLE_SCREEN_BUFFER_INFO csbi; /* to get buffer info */     
-
-    /* get the number of character cells in the current buffer */ 
-    GetConsoleScreenBufferInfo( GetStdHandle( STD_OUTPUT_HANDLE ), &csbi );
-    consoleSize.X = csbi.srWindow.Right + 1;
-    consoleSize.Y = csbi.srWindow.Bottom + 1;
-
-    // set the character to be in the center of the screen.
-    charLocation.X = (consoleSize.X - 10) / 2;
-    charLocation.Y = consoleSize.Y - 2;// Mr Sim's
-
-	ImplementObjects();
+    ImplementObjects();
 
 	ImplementLife();
-
-
-    elapsedTime = 0.0;
 }
 
 void shutdown()
 {
     // Reset to white text on black background
 	colour(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
+
+    shutDownConsole();
 }
 
 void getInput()
@@ -108,12 +101,12 @@ void update(double dt)
 		charLocation.X--; 
 
     }
-    if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 1)
+    if (keyPressed[K_DOWN] && charLocation.Y < ConsoleSize.Y - 1)
     {
         Beep(1440, 30);
         charLocation.Y++; 
     }
-    if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 29)
+    if (keyPressed[K_RIGHT] && charLocation.X < ConsoleSize.X - 29)
     {
         Beep(1440, 30);
         charLocation.X++; 
@@ -145,9 +138,8 @@ void update(double dt)
 
 void render()
 {
-    // clear previous screen
-    colour(0x3C);
-    cls();
+    // Clears the buffer with this colour attribute
+    clearBuffer(0x1F);
 
     // render time taken to calculate this frame
     gotoXY(70, 0);
@@ -178,4 +170,7 @@ void render()
 
 	//Shannon : Render Level Timer
 	RenderLvTimer();
+
+	// Writes the buffer to the console, hence you will see what you have written
+    flushBufferToConsole();
 }
