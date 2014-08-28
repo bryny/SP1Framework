@@ -98,10 +98,6 @@ void Render_Apple(int num)
 			C.Y = Object[num].Location.Y - y;
 			writeToBuffer(C," ",Apple[7*(x+1)-(y+1)]);
 		}
-		if (y == 6)
-		{
-			break;
-		}
 	}
 }
 
@@ -114,11 +110,7 @@ void Render_Bomb(int num)
 			C.X = Object[num].Location.X + x;
 			C.Y = Object[num].Location.Y - y;
 			writeToBuffer(C," ",Bomb[7*(x+1)-(y+1)]);
-		}
-		if (y == 6)
-		{
-			break;
-		}
+		}		
 	}
 }
 
@@ -131,10 +123,6 @@ void Render_Cherry(int num)
 			C.X = Object[num].Location.X + x;
 			C.Y = Object[num].Location.Y - y;
 			writeToBuffer(C," ",Cherry[7*(x+1)-(y+1)]);
-		}
-		if (y == 6)
-		{
-			break;
 		}
 	}
 }
@@ -149,10 +137,6 @@ void Render_Banana(int num)
 			C.Y = Object[num].Location.Y - y;
 			writeToBuffer(C," ",Banana[7*(x+1)-(y+1)]);
 		}
-		if (y == 6)
-		{
-			break;
-		}
 	}
 }
 
@@ -165,10 +149,6 @@ void Render_Orange(int num)
 			C.X = Object[num].Location.X + x;
 			C.Y = Object[num].Location.Y - y;
 			writeToBuffer(C," ",Orange[7*(x+1)-(y+1)]);
-		}
-		if (y == 6)
-		{
-			break;
 		}
 	}
 }
@@ -183,10 +163,6 @@ void Render_Pear(int num)
 			C.Y = Object[num].Location.Y - y;
 			writeToBuffer(C," ",Pear[7*(x+1)-(y+1)]);
 		}
-		if (y == 6)
-		{
-			break;
-		}
 	}
 }
 
@@ -199,10 +175,6 @@ void Render_Pineapple(int num)
 			C.X = Object[num].Location.X + x;
 			C.Y = Object[num].Location.Y - y;
 			writeToBuffer(C," ",Pineapple[7*(x+1)-(y+1)]);
-		}
-		if (y == 6)
-		{
-			break;
 		}
 	}
 }

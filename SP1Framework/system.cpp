@@ -8,8 +8,8 @@ void ImplementLife()
 {
 	//Shannon : Implement Life System
 	Life.Value = 3;
-	Life.Location.X = ConsoleSize.X - 2;
-	Life.Location.Y = ConsoleSize.Y - 53;
+	Life.Location.X = ConsoleSize.X - 7;
+	Life.Location.Y = ConsoleSize.Y - 55;
 	
 }
 
@@ -86,7 +86,7 @@ int Timer_Reset = Timer_Active;
 void UpdateLevel()
 {
 	//Shannon : On level up, update level, reset counter
-	if (MiniLevel <= 3 && LevelCounter == 2)
+	if (MiniLevel <= 3 && LevelCounter >= 2)
 	{
 		//Level 1
 		if (Level == 1)
@@ -103,6 +103,15 @@ void UpdateLevel()
 				//}
 				break;
 			case 2:
+				//Condition
+				//if (...)
+				//{
+					Timer_Set = false;
+					++MiniLevel;
+					LevelCounter = 0;
+				//}
+				break;
+			case 3:
 				//Condition
 				//if (...)
 				//{
@@ -129,6 +138,15 @@ void UpdateLevel()
 				//}
 				break;
 			case 2:
+				//Condition
+				//if (...)
+				//{
+					Timer_Set = false;
+					++MiniLevel;
+					LevelCounter = 0;
+				//}
+				break;
+			case 3:
 				//Condition
 				//if (...)
 				//{
@@ -281,23 +299,21 @@ void UpdateLvTimer()
 //Shannon : Display the level
 void RenderLevel() 
 {
+	COORD LevelLocation = {72,10};
+	COORD BonusLocation = {72,11};
 	//Shannon : Display for normal levels
 	if (MiniLevel <= 3)
 	{
-		gotoXY(75,10);
-		colour(0x0C);
-		std::cout << Level << '-' << MiniLevel;
+		
+		std::string LevelCounter = std::to_string(static_cast<long long>(Level)) + "-" + std::to_string(static_cast<long long>(MiniLevel));
+		writeToBuffer(LevelLocation,LevelCounter,0x0C);
 	}
 
 	//Shannon : Display for Bonus Level
 	if (MiniLevel == 4)
 	{
-		gotoXY(75,10);
-		colour(0x0C);
-		std::cout << "Bonus";
-		gotoXY(75,11);
-		colour(0x0C);
-		std::cout << "Level";
+		writeToBuffer(LevelLocation,"Bonus",0x0C);
+		writeToBuffer(BonusLocation,"Level",0x0C);
 	}
 }
 

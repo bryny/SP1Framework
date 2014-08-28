@@ -165,10 +165,10 @@ void render()
 	
 	//Jenny: Render border
 	RenderBorder();
-	/*
+	
 	//Shannon : Render Level System
 	RenderLevel();
-	*/
+	
 	//Shannon : Render Level Timer
 	RenderLvTimer();
 	

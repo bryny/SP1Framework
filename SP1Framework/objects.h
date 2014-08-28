@@ -11,6 +11,7 @@
 struct Type //Shannon : Objects' Struct System
 {
 	COORD Location; //Starting location to base render around
+	COORD EndLocation; //Bottom right of the Object
 	int RenderTime; //Timer to render each row of the object
 	int State; //State whether the Object is in play or not
 	int id; //Identify what type of Object it is

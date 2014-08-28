@@ -76,6 +76,7 @@ void UpdateObjects()
 
 				Object[Number].Location.X = ObjectStart.X;
 				Object[Number].Location.Y = 0;
+				Object[Number].EndLocation.Y = 0;
 				Object[Number].State = CREATED;
 				Object[Number].RenderTime = 0; //Shannon : Initialized for Object 'dripping'
 
@@ -86,30 +87,37 @@ void UpdateObjects()
 				if (ObjectChance <= appleChance)
 				{
 					Object[Number].id = APPLE;
+					Object[Number].EndLocation.X = Object[Number].Location.X + 4;
 				}
 				else if (ObjectChance <= appleChance + bombChance)
 				{
 					Object[Number].id = BOMB;
+					Object[Number].EndLocation.X = Object[Number].Location.X + 4;
 				}
 				else if (ObjectChance < appleChance + bombChance + cherryChance)
 				{
 					Object[Number].id = CHERRY;
+					Object[Number].EndLocation.X = Object[Number].Location.X + 6;
 				}
 				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance)
 				{
 					Object[Number].id = BANANA;
+					Object[Number].EndLocation.X = Object[Number].Location.X + 5;
 				}
 				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance)
 				{
 					Object[Number].id = ORANGE;
+					Object[Number].EndLocation.X = Object[Number].Location.X + 4;
 				}
 				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance + pearChance)
 				{
 					Object[Number].id = PEAR;
+					Object[Number].EndLocation.X = Object[Number].Location.X + 4;
 				}
 				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance + pearChance + pineappleChance)
 				{
 					Object[Number].id = PINEAPPLE;
+					Object[Number].EndLocation.X = Object[Number].Location.X + 4;
 				}
 				++Number;
 			} //Shannon : End of Object Creation
@@ -132,8 +140,13 @@ void UpdateObjects()
 			{
 				if (Object[ii].Location.Y < ConsoleSize.Y - 1)
 				{
+					//Shannon : Object displaces based on fallspeed
 					Object[ii].Location.Y += fallSpeed;
-					++Object[ii].RenderTime;
+					//Shannon : Increase amount rendered if Object is not fully rendered
+					if (Object[ii].RenderTime < 7)
+					{
+						++Object[ii].RenderTime;
+					}
 				}
 			}
 		}
@@ -153,8 +166,12 @@ void UpdateObjects()
 			//
 			Object[ii].State = UNCREATED;
 		}
+
+		//Shannon : Check collision for the object with basket
+		COORD Basket = {charLocation.X, charLocation.Y - 10};
+
 		//Shannon : How objects affect the player when collision happens
-		if (Object[ii].State == CREATED && charLocation.X == Object[ii].Location.X && charLocation.Y == Object[ii].Location.Y)
+		if (Object[ii].State == CREATED && Object[ii].Location.X > Basket.X && Object[ii].Location.X < Basket.X + 10 && Basket.Y == Object[ii].Location.Y && Object[ii].EndLocation.X > Basket.X && Object[ii].EndLocation.X < Basket.X + 10)
 		{
 			//Shannon : Object disappears after collision
 			Object[ii].State = UNCREATED;
