@@ -21,7 +21,6 @@ bool keyPressed[K_COUNT];
 
 // Game specific variables here
 COORD charLocation;
-COORD charArea[11][12]; //Shannon : Create Coordinates for Character's Graphics
 
 //Shannon : Jump function
 enum jumpability
@@ -40,15 +39,7 @@ void init()
 
     charLocation.X = (ConsoleSize.X - 10) / 2;
     charLocation.Y = ConsoleSize.Y - 2;
-	// Set the coordinates for the character based on his starting location
-	for (int x_value = 0; x_value < 11; ++x_value)
-	{
-		for (int y_value = 0; y_value < 12; ++y_value)
-		{
-			charArea[x_value][y_value].X = charLocation.X + x_value;
-			charArea[x_value][y_value].Y = charLocation.Y - y_value;
-		}
-	}
+	
 
     ImplementObjects();
 
@@ -91,13 +82,6 @@ void update(double dt)
     {
 		 Beep(1440, 30);
 		 charLocation.Y -= 6; 
-		 for (int x_value = 0; x_value < 11; ++x_value)
-		{
-			for (int y_value = 0; y_value < 12; ++y_value)
-			{
-				charArea[x_value][y_value].Y -= 6;
-			}
-		}
 		 jump = jumptime;
     }
 	//Shannon : Player will stay in the air for number of frames of jumptime
@@ -109,13 +93,6 @@ void update(double dt)
 	if (jump == 1)
 	{
 		charLocation.Y +=6;
-		for (int x_value = 0; x_value < 11; ++x_value)
-		{
-			for (int y_value = 0; y_value < 12; ++y_value)
-			{
-				charArea[x_value][y_value].Y += 6;
-			}
-		}
 	}
 
     if (keyPressed[K_LEFT] && charLocation.X > 0)
@@ -123,38 +100,16 @@ void update(double dt)
 
 		Beep(1440, 30);
 		charLocation.X--;
-		for (int x_value = 0; x_value < 11; ++x_value)
-		{
-			for (int y_value = 0; y_value < 12; ++y_value)
-			{
-				charArea[x_value][y_value].X--;
-			}
-		}
-
     }
     if (keyPressed[K_DOWN] && charLocation.Y < ConsoleSize.Y - 1)
     {
         Beep(1440, 30);
         charLocation.Y++; 
-		for (int x_value = 0; x_value < 11; ++x_value)
-		{
-			for (int y_value = 0; y_value < 12; ++y_value)
-			{
-				charArea[x_value][y_value].Y++;
-			}
-		}
     }
     if (keyPressed[K_RIGHT] && charLocation.X < ConsoleSize.X - 29)
     {
         Beep(1440, 30);
         charLocation.X++; 
-		for (int x_value = 0; x_value < 11; ++x_value)
-		{
-			for (int y_value = 0; y_value < 12; ++y_value)
-			{
-				charArea[x_value][y_value].X++;
-			}
-		}
     }
 	
 	
@@ -187,37 +142,30 @@ void render()
     clearBuffer(0x1F);
 
     // render time taken to calculate this frame
-	COORD F_P_S = {70,0};
+	COORD F_P_S = {66,0};
 	std::string FPS_String = std::to_string(static_cast<long double>(1.0 / deltaTime)) + "fps";
-	
-
-
 	writeToBuffer(F_P_S,FPS_String);
 
-	/*
-    gotoXY(70, 0);
-    colour(0x1A);
-    std::cout << 1.0 / deltaTime << "fps" << std::endl;
-  
-    gotoXY(0, 0);
-    colour(0x59);
-    std::cout << elapsedTime << "secs" << std::endl;
-	*/
+	COORD EL_TIME = {0,0};
+	std::string TIME_String = std::to_string(static_cast<long double>(elapsedTime)) + "secs";
+	writeToBuffer(EL_TIME,TIME_String);
+
+
     //Jenny : Render Character
 	Render_Man();
-	/*
+	
 	//Jeffrey : Render Score System
 	displayscore();
-	*/
+	
 	//Shannon : Render Objects & Rat
    	RenderObjects();
-	/*
+	
 	//Shannon : Render Life System
 	RenderLife();
-
+	
 	//Jenny: Render border
 	RenderBorder();
-
+	/*
 	//Shannon : Render Level System
 	RenderLevel();
 	*/

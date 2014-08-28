@@ -8,11 +8,9 @@ void ImplementLife()
 {
 	//Shannon : Implement Life System
 	Life.Value = 3;
-	for (int i = 0; i < 3; ++i)
-	{
-		Life.Location[i].X = ConsoleSize.X - 2*(i+2);
-		Life.Location[i].Y = ConsoleSize.Y - 53;
-	}
+	Life.Location.X = ConsoleSize.X - 2;
+	Life.Location.Y = ConsoleSize.Y - 53;
+	
 }
 
 void RenderLife()
@@ -20,25 +18,24 @@ void RenderLife()
 	// Shannon : Render Life System
 	// Jenny: heart
 	char heart = 3;
-	for (int i = 0; i < 3; ++i)
+	COORD C;
+	for (int i = 0; i < Life.Value; ++i)
 	{
-		if (Life.Value > i)
-		{
-			gotoXY(Life.Location[i]);
-			colour(0x0C);
-			std::cout << heart;
-		}
+		C.X = Life.Location.X;
+		C.Y = Life.Location.Y + 2*i;
+		writeToBuffer(C,heart,0x0C);
 	}
 }
 
 // Jenny: Border of x on the right
 void RenderBorder()
 {
+	COORD C;
+	C.X = 68;
 	for (int y = 2; y <= 52; y++)
 	{
-		gotoXY(68,y);
-		colour(0x1A);
-		std::cout << 'x';
+		C.Y = y;
+		writeToBuffer(C,'x',0x1A);
 	}
 }
 
@@ -48,27 +45,21 @@ void displayscore()
 {
 	if(score == 1000000000 || score > 1000000000)
 	{
-		gotoXY(32, 10);
-		colour(0x0C);
-		std::cout << "Congratulations";
-		gotoXY(36, 11);
-		colour(0x0C);
-		std::cout << "You Won";
+		COORD WinWord1 = {32,10};
+		writeToBuffer(WinWord1,"Congratulations",0x0C);
+		COORD WinWord2 = {36,11};
+		writeToBuffer(WinWord2,"You Won",0x0C);
 	}
 	if (Life.Value != 0)
 	{
-		gotoXY(70,2);
-		colour(0x1A);
-		std::cout << "Score:";
-		gotoXY(70,3);
-		colour(0x1A);
-		std::cout << score;
+		COORD Score = {70,2};
+		std::string ScoreDisplay = "Score:" + std::to_string(score);
+		writeToBuffer(Score,ScoreDisplay,0x1A);
 	}
 	else if(Life.Value == 0)
 	{
-		gotoXY(35, 10);
-		colour(0x0C);
-		std::cout << "GAME OVER";
+		COORD LoseWord = {35,10};
+		writeToBuffer(LoseWord,"GAME OVER",0x0c);
 
 		//Jenny : call for score.cpp
 		//scoreboard();
@@ -199,7 +190,7 @@ void updateDifficulty()
 	randomizer = 100; //this will always be 100
 	if (levelDifficulty == EASY)
 	{
-		pearChance = 100;
+		bananaChance = 100;
 
 		fallSpeed = 1;
 		if (Timer_Set == false)

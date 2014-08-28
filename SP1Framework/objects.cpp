@@ -35,7 +35,7 @@ void ImplementObjects()
 
 	// Shannon : Implement Rat
 	Rat.State = UNCREATED;
-	Rat.Location.Y = charLocation.Y - 4;
+	Rat.Location.Y = charLocation.Y;
 	Rat.Location.X = 0;
 
 	xyz = 0;
@@ -222,7 +222,7 @@ void UpdateRat()
 	{
 		Rat.State = UNCREATED;
 		Rat.Location.X = 0;
-		if (score > 0)
+		if (score >= 100)
 		{
 			score -= 100;
 		}

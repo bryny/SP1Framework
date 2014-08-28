@@ -9,7 +9,7 @@
 struct System //Shannon : System Struct Draft
 {
 	int Value;
-	COORD Location[3];
+	COORD Location;
 };
 extern System Life; //Shannon : Life System
 void ImplementLife();
