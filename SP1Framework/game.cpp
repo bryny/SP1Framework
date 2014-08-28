@@ -97,18 +97,14 @@ void update(double dt)
 
     if (keyPressed[K_LEFT] && charLocation.X > 0)
     {
-
-		Beep(1440, 30);
 		charLocation.X--;
     }
     if (keyPressed[K_DOWN] && charLocation.Y < ConsoleSize.Y - 1)
     {
-        Beep(1440, 30);
         charLocation.Y++; 
     }
     if (keyPressed[K_RIGHT] && charLocation.X < ConsoleSize.X - 29)
     {
-        Beep(1440, 30);
         charLocation.X++; 
     }
 	
