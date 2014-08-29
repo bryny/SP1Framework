@@ -31,34 +31,22 @@ enum ObjectType //Shannon : Type of Object
 	PEAR, // SCORE = 750, RARE
 	PINEAPPLE //SCORE = 1000, VERY RARE
 };
-//enum ObjectDropRate //Shannon : Sets chance at which different objects drop
-//{
-//	//Shannon : NOTE - Sum of chance HAS TO EQUAL Randomizer
-//	RANDOMIZER = 100, //Shannon : Sets the random value for Object Chance as 1 ~ RANDOMIZER (e.g. 1~100)
-//	APPLECHANCE = 80, //Shannon : Chance of Apple appearing = APPLECHANCE/RANDOMIZER
-//	BOMBCHANCE = 20 //Shannon : Chance of Bomb appearing = BOMBCHANCE/RANDOMIZER
-//};
 
-//Yi Yang: These values should not be Enum constant.
-//		   The appleChance value will decrease and the
-//		   bombChance value will increase as the level
-//		   increases, so I changed them to int instead.
-//         (otherwise a constant value cannot be modified)
 extern int randomizer, appleChance, bombChance, cherryChance, bananaChance, orangeChance, pearChance, pineappleChance, fallSpeed;
 
-const int NumberLimit = 10; // Shannon : Max number of objects to be falling
-const int TotalLimit = 20; //Shannon : NumberLimit + Minimum Requirement
-extern Type Object[TotalLimit]; //Shannon : Type - Object[MaxNumber]
+const int NumberLimit = 10; // Shannon : Maximum number of objects on screen at any time
+extern Type Object[NumberLimit]; //Shannon : Type - Object[MaxNumber]
 extern COORD ObjectStart; //Shannon : Object Starting Location
 extern int timerlimit;
 extern int timer;
 
-//Shannon : The Rat
+//Shannon : Rat Variables & Functions
 void UpdateRat();
 extern Type Rat;
 
 //Object Functions Declaration
 void ImplementObjects();
+void CreateObjects();
 void UpdateObjects();
 void RenderObjects();
 

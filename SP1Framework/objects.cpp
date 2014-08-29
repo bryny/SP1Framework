@@ -8,21 +8,19 @@
 
 
 
-Type Object[TotalLimit]; //Shannon : Type - Object[MaxNumber + Minimum requirement]
+Type Object[NumberLimit]; //Shannon : Type - Object[MaxNumber + Minimum requirement]
 int Number = 0; //Shannon : Test
-int Number2 = NumberLimit;
 int timer = 10; //Shannon : Timer - Number of frames before objects are updated (excluding Rat)
-int ObjectChance;
 int timerlimit;
+int ObjectChance;
 COORD ObjectStart;
-
-
-int xyz;
+int ObjectSpawnTimer; //Shannon : Timer for when objects are next created
 
 //Shannon : The Rat
 Type Rat;
 int RatChance;
 
+//Shannon : Initialize Objects & Rat
 void ImplementObjects()
 {
 	// Shannon : Implement Objects
@@ -30,6 +28,7 @@ void ImplementObjects()
 	{
 		Object[i].State = UNCREATED;
 	}
+	ObjectSpawnTimer = 0;
 	//Shannon : Implement Timer
 	int timerlimit = timer;
 
@@ -38,109 +37,110 @@ void ImplementObjects()
 	Rat.Location.Y = charLocation.Y;
 	Rat.Location.X = 0;
 
-	xyz = 0;
+	// Shannon : Implement the randomizer
+	srand((unsigned)time(NULL));
 }
 
-//Yi Yang: These values should not be Enum constant.
-//		   The appleChance value will decrease and the
-//		   bombChance value will increase as the level
-//		   increases, so I changed them to int instead.
-//         (otherwise a constant value cannot be modified)
 int randomizer, appleChance, bombChance, cherryChance, bananaChance, orangeChance, pearChance, pineappleChance, fallSpeed;
 
+//Shannon : Create Objects
+void CreateObjects()
+{
+	//Shannon : Objects randomly appear based on starting location on top of screen
+	ObjectStart.X = rand() % 50; //Shannon : Sets the X-coordinate of the Object
+	ObjectChance = rand() % randomizer + 1; //Shannon : Creates a random number that is used to determine the type of Object created.
+
+	if (Object[Number].State == UNCREATED && ObjectSpawnTimer <= 0)
+	{
+		ObjectSpawnTimer = rand() % 6 + 5; //Shannon : Objects will spawn 5~10 frames after the previous object.
+
+		//Shannon : Prevent objects from spawning in collision range of previous objects
+		while (ObjectStart.X < Object[Number-1].Location.X + 7 && ObjectStart.X > Object[Number-1].Location.X - 7)
+		{
+			ObjectStart.X = rand() % 50; //Shannon : Re-roll if collision detected
+		}
+		
+		//Shannon : Objects spawn at the top
+		Object[Number].Location.X = ObjectStart.X;
+		Object[Number].Location.Y = 0;
+		Object[Number].EndLocation.Y = 0;
+		Object[Number].State = CREATED;
+		Object[Number].RenderTime = 0; //Shannon : Initialized for Object to Render as it falls
+
+		//Shannon : Define Objects based on ObjectChance
+		if (ObjectChance <= appleChance)
+		{
+			Object[Number].id = APPLE;
+			Object[Number].EndLocation.X = Object[Number].Location.X + 4;
+		}
+		else if (ObjectChance <= appleChance + bombChance)
+		{
+			Object[Number].id = BOMB;
+			Object[Number].EndLocation.X = Object[Number].Location.X + 4;
+		}
+		else if (ObjectChance < appleChance + bombChance + cherryChance)
+		{
+			Object[Number].id = CHERRY;
+			Object[Number].EndLocation.X = Object[Number].Location.X + 6;
+		}
+		else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance)
+		{
+			Object[Number].id = BANANA;
+			Object[Number].EndLocation.X = Object[Number].Location.X + 5;
+		}
+		else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance)
+		{
+			Object[Number].id = ORANGE;
+			Object[Number].EndLocation.X = Object[Number].Location.X + 4;
+		}
+		else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance + pearChance)
+		{
+			Object[Number].id = PEAR;
+			Object[Number].EndLocation.X = Object[Number].Location.X + 4;
+		}
+		else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance + pearChance + pineappleChance)
+		{
+			Object[Number].id = PINEAPPLE;
+			Object[Number].EndLocation.X = Object[Number].Location.X + 4;
+		}
+		++Number;
+	} //Shannon : End of Object Creation
+	
+
+		
+
+	//When all objects have been used,
+	if (Number == NumberLimit)
+	{
+		Number = 0;
+	}
+}
+
+//Shannon : Update Objects
 void UpdateObjects()
 {
-	//Shannon : Timer slowly countsdown
+	//Shannon : Timer counts down per frame
 	if (timerlimit != 0)
 	{
 		--timerlimit;
 	}
+
+
 	//Shannon : When timer reaches 0, objects are updated and timer is reset
 	if (timerlimit == 0)
 	{
 		timerlimit = timer;
-		//Shannon : Objects randomly appear based on starting location on top of screen
-		if (Number < NumberLimit)
-		{
-			ObjectStart.X = rand() % 50; //Shannon : Sets the X-coordinate of Object
-			ObjectChance = rand() % randomizer + 1; //Shannon : Sets the randomizer for objects
-
-			if (Object[Number].State == UNCREATED && xyz <= 0)
-			{
-				xyz = 5;
-				//Shannon : Collision Detection , Prevent objects from spawning in collision range of previous objects
-				while (ObjectStart.X < Object[Number-1].Location.X + 7 && ObjectStart.X > Object[Number-1].Location.X - 7)
-				{
-					ObjectStart.X = rand() % 50; //Shannon : Re-Randomize if colliding
-				}
-
-				Object[Number].Location.X = ObjectStart.X;
-				Object[Number].Location.Y = 0;
-				Object[Number].EndLocation.Y = 0;
-				Object[Number].State = CREATED;
-				Object[Number].RenderTime = 0; //Shannon : Initialized for Object 'dripping'
-
-
-				
-
-				//Shannon : Define Objects based on ObjectChance
-				if (ObjectChance <= appleChance)
-				{
-					Object[Number].id = APPLE;
-					Object[Number].EndLocation.X = Object[Number].Location.X + 4;
-				}
-				else if (ObjectChance <= appleChance + bombChance)
-				{
-					Object[Number].id = BOMB;
-					Object[Number].EndLocation.X = Object[Number].Location.X + 4;
-				}
-				else if (ObjectChance < appleChance + bombChance + cherryChance)
-				{
-					Object[Number].id = CHERRY;
-					Object[Number].EndLocation.X = Object[Number].Location.X + 6;
-				}
-				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance)
-				{
-					Object[Number].id = BANANA;
-					Object[Number].EndLocation.X = Object[Number].Location.X + 5;
-				}
-				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance)
-				{
-					Object[Number].id = ORANGE;
-					Object[Number].EndLocation.X = Object[Number].Location.X + 4;
-				}
-				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance + pearChance)
-				{
-					Object[Number].id = PEAR;
-					Object[Number].EndLocation.X = Object[Number].Location.X + 4;
-				}
-				else if (ObjectChance < appleChance + bombChance + cherryChance + bananaChance + orangeChance + pearChance + pineappleChance)
-				{
-					Object[Number].id = PINEAPPLE;
-					Object[Number].EndLocation.X = Object[Number].Location.X + 4;
-				}
-				++Number;
-			} //Shannon : End of Object Creation
-			--xyz;
-		} //Shannon : End of Object Creation Number Reset
-
-		
-
-		
-		if (Number == NumberLimit)
-		{
-			Number = 0;
-		}
+		--ObjectSpawnTimer; //Shannon : Spawn Countdown ticks down
 
 		//	Shannon : Objects slowly descend to player if 
 		//	they are in play and have not touched the bottom.
-		for (int ii = 0; ii < TotalLimit; ++ii)
+		for (int ii = 0; ii < NumberLimit; ++ii)
 		{
 			if (Object[ii].State == CREATED)
 			{
 				if (Object[ii].Location.Y < ConsoleSize.Y - 1)
 				{
-					//Shannon : Object displaces based on fallspeed
+					//Shannon : Objects displace based on fallspeed
 					Object[ii].Location.Y += fallSpeed;
 					//Shannon : Increase amount rendered if Object is not fully rendered
 					if (Object[ii].RenderTime < 7)
@@ -152,10 +152,10 @@ void UpdateObjects()
 		}
 	} //Shannon : End of timer
 	
-	for (int ii = 0; ii < TotalLimit; ++ii)
+	for (int ii = 0; ii < NumberLimit; ++ii)
 	{
 		// Shannon : Objects are 'recycled' after touching player or bottom of screen
-		if (Object[ii].Location.Y == ConsoleSize.Y - 1)
+		if (Object[ii].Location.Y >= ConsoleSize.Y - 1)
 		{
 			//Shannon : Bonus Level also counts objects that reach the bottom
 			if (Object[ii].id != BOMB && Object[ii].State == CREATED && MiniLevel == 4)
@@ -221,7 +221,7 @@ void UpdateObjects()
 void UpdateRat()
 {
 	//Shannon : If Rat is uncreated, it has a chance to spawn
-	RatChance = rand() % 50 + 1;
+	RatChance = rand() % 100 + 1;
 	if (Rat.State == UNCREATED)
 	{
 		if (RatChance <= 5)
@@ -235,7 +235,7 @@ void UpdateRat()
 		++Rat.Location.X;
 	}
 	//Shannon : If the Rat touches the player, lose score and Rat disappears
-	if (Rat.State == CREATED && charLocation.X == Rat.Location.X && charLocation.Y == Rat.Location.Y)
+	if (Rat.State == CREATED && Rat.Location.X >= charLocation.X - 4 && Rat.Location.X <= charLocation.X + 10 && Rat.Location.Y == charLocation.Y)
 	{
 		Rat.State = UNCREATED;
 		Rat.Location.X = 0;
@@ -245,7 +245,7 @@ void UpdateRat()
 		}
 	}
 	//Shannon : When it reaches the other side, it disappears
-	if (Rat.Location.X == ConsoleSize.X - 1)
+	if (Rat.Location.X == ConsoleSize.X - 5)
 	{
 		Rat.State = UNCREATED;
 		Rat.Location.X = 0;
@@ -257,7 +257,7 @@ void UpdateRat()
 void RenderObjects()
 {
 	// Shannon : Render objects if created
-	for (int i = 0; i < TotalLimit; ++i)	
+	for (int i = 0; i < NumberLimit; ++i)	
 	{
 		if (Object[i].State == CREATED)
 		{

@@ -28,7 +28,7 @@ enum jumpability
 	ENABLED
 };
 int jump = ENABLED; //Shannon : Sets whether player can jump
-int jumptime = 5; //Shannon : Number of frames player will float after jumping
+int jumptime = 20; //Shannon : Number of frames player will float after jumping
 
 void init()
 {
@@ -37,12 +37,14 @@ void init()
 
     initConsole(ConsoleSize, "Fruit Bomb");
 
+	// Sets Character's starting coordinates
     charLocation.X = (ConsoleSize.X - 10) / 2;
     charLocation.Y = ConsoleSize.Y - 2;
 	
-
+	//Shannon : Initializes Objects
     ImplementObjects();
 
+	//Shannon : Initializes Life System
 	ImplementLife();
 }
 
@@ -71,9 +73,15 @@ void update(double dt)
     elapsedTime += dt;
     deltaTime = dt;
 
-	//Shannon : If the player has 0 lives, game stops
-	if (Life.Value > 0)
+	// quits the game if player hits the escape key
+    if (keyPressed[K_ESCAPE])
+        g_quitGame = true;    
+
+	//Shannon : Game will continue updating as long as the player has 1 Life
+	if (Life.Value <= 0)
 	{
+		return;
+	}
 
 	// Updating the location of the character based on the key press
 
@@ -108,26 +116,21 @@ void update(double dt)
         charLocation.X++; 
     }
 	
-	
 	//Shannon : Updates the level based on LevelCounter
 	UpdateLevel();
 
-	//Yi Yang : Updates the level difficulty base on difficultyEnum and Level
+	//Yi Yang : Updates the level difficulty based on difficultyEnum and Level
 	updateDifficulty();
 
 	//Shannon : Updates the objects & rats for coordinates and collision detection
 	UpdateObjects();
 	UpdateRat();
 
-	//Shannon : Update Level Timer
-	UpdateLvTimer();
+	//Shannon : Create Objects
+	CreateObjects();
 
-	} //Shannon : End of Life Detection
-
-
-    // quits the game if player hits the escape key
-    if (keyPressed[K_ESCAPE])
-        g_quitGame = true;    
+	//Shannon : Updates Level Timer
+	UpdateLvTimer();   
 }
 
 
@@ -142,6 +145,7 @@ void render()
 	std::string FPS_String = std::to_string(static_cast<long double>(1.0 / deltaTime)) + "fps";
 	writeToBuffer(F_P_S,FPS_String);
 
+	// elapsed running time of file
 	COORD EL_TIME = {0,0};
 	std::string TIME_String = std::to_string(static_cast<long double>(elapsedTime)) + "secs";
 	writeToBuffer(EL_TIME,TIME_String);
