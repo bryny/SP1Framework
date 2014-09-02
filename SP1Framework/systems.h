@@ -16,7 +16,7 @@ void ImplementLife();
 void RenderLife();
 
 //Jeffrey : Score System
-extern unsigned long long score;
+extern int long long score;
 void displayscore();
 
 //Shannon : Level System

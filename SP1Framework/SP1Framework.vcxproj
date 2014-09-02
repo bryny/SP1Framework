@@ -79,18 +79,20 @@
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="objects.cpp" />
     <ClCompile Include="render.cpp" />
-    <ClCompile Include="score.cpp" />
+    <ClCompile Include="highscore.cpp" />
     <ClCompile Include="system.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="objects.h" />
     <ClInclude Include="render.h" />
-    <ClInclude Include="score.h" />
+    <ClInclude Include="highscore.h" />
     <ClInclude Include="systems.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -4,6 +4,7 @@
 #include "Framework\console.h"
 #include "render.h"
 #include "objects.h"
+#include <fstream>
 
 //Shannon : Simplifying the colour creation
 WORD black = 0;
@@ -179,6 +180,21 @@ void Render_Pineapple(int num)
 	}
 }
 
+//Jenny : Game over
+void over()
+{
+	clearBuffer();
+	std::ifstream input;
+	string over;
+	input.open("over.txt");
+	while(!input.eof())
+	{
+		getline (input, over);
+		COORD over_loc = {0,35};
+		writeToBuffer(over_loc,over);
+		continue;
+	}
+}
 
 //Jenny : Render Man
 void Render_Man()
@@ -207,3 +223,265 @@ void Render_Rat()
 		}
 	}
 }
+
+void Render_Menuman(COORD MEnu)
+{
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); MEnu.Y -=11;++MEnu.X;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); MEnu.Y -=11;++MEnu.X;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",144); ++MEnu.Y;
+	writeToBuffer(MEnu," ",144); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); MEnu.Y -=11;++MEnu.X;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",208); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",144); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); MEnu.Y -=11;++MEnu.X;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",144); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); MEnu.Y -=11;++MEnu.X;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",144); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); MEnu.Y -=11;++MEnu.X;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",144); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); MEnu.Y -=11;++MEnu.X;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",208); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",144); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); MEnu.Y -=11;++MEnu.X;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",144); ++MEnu.Y;
+	writeToBuffer(MEnu," ",144); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); MEnu.Y -=11;++MEnu.X;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); MEnu.Y -=11;++MEnu.X;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",64); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); MEnu.Y -=11;++MEnu.X;
+}
+void Render_Menuapple(COORD MEnu)
+{
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); MEnu.Y -= 6;++MEnu.X;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",240); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); MEnu.Y -= 6;++MEnu.X;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",32); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); MEnu.Y -= 6;++MEnu.X;
+	writeToBuffer(MEnu," ",32); ++MEnu.Y;
+	writeToBuffer(MEnu," ",32); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); MEnu.Y -= 6;++MEnu.X;
+	writeToBuffer(MEnu," ",32); ++MEnu.Y;
+	writeToBuffer(MEnu," ",32); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); MEnu.Y -= 6;++MEnu.X;
+	//d_red = 64;
+	//grey = 112;
+	//black = 0;
+	//d_blue = 16;
+	//pink = 208;
+	//blue = 144;
+	//red = 192;
+}
+void Render_Menubomb(COORD MEnu)
+{
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); MEnu.Y -=6;++MEnu.X;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",240); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); MEnu.Y -=6;++MEnu.X;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",192); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); MEnu.Y -=6;++MEnu.X;
+	writeToBuffer(MEnu," ",96); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); MEnu.Y -=6;++MEnu.X;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",224); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); MEnu.Y -=6;++MEnu.X;
+	/*WORD Bomb[35] =
+	{16,16,16,0,0,0,16,
+	16,16,0,240,0,0,0,
+	192,192,0,0,0,0,0,
+	96,16,0,0,0,0,0,
+	16,224,16,0,0,0,16};*/
+}
+void Render_Menurat(COORD MEnu)
+{
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",208); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); MEnu.Y -=4;++MEnu.X;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); MEnu.Y -=4;++MEnu.X;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); MEnu.Y -=4;++MEnu.X;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",0); ++MEnu.Y;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); MEnu.Y -=4;++MEnu.X;
+	writeToBuffer(MEnu," ",112); ++MEnu.Y;
+	writeToBuffer(MEnu," ",208); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); ++MEnu.Y;
+	writeToBuffer(MEnu," ",16); MEnu.Y -=4;++MEnu.X;
+}
+/*
+WORD RatColour[25] = 
+{112,208,16,16,16,
+112,112,0,112,16,
+16,112,112,112,0,
+112,112,0,112,16,
+112,208,16,16,16};
+}
+*/

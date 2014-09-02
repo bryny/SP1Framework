@@ -1,13 +1,16 @@
 #include "game.h"
+#include "render.h"
 #include "objects.h"
 #include "systems.h"
+#include "highscore.h"
+#include "menu.h"
 
 //Life System
 System Life; //Shannon : Life System
 void ImplementLife()
 {
 	//Shannon : Implement Life System
-	Life.Value = 3;
+	Life.Value = 0;
 	Life.Location.X = ConsoleSize.X - 7;
 	Life.Location.Y = ConsoleSize.Y - 55;
 	
@@ -40,7 +43,7 @@ void RenderBorder()
 }
 
 //Jeffrey : Score System
-unsigned long long score;
+int long long score = 150;
 void displayscore()
 {
 	if(score == 1000000000 || score > 1000000000)
@@ -56,15 +59,6 @@ void displayscore()
 		std::string ScoreDisplay = "Score:" + std::to_string(score);
 		writeToBuffer(Score,ScoreDisplay,0x1A);
 	}
-	else if(Life.Value == 0)
-	{
-		COORD LoseWord = {35,10};
-		writeToBuffer(LoseWord,"GAME OVER",0x0c);
-
-		//Jenny : call for score.cpp
-		//scoreboard();
-	}
-
 }
 
 
@@ -208,7 +202,7 @@ void updateDifficulty()
 	randomizer = 100; //this will always be 100
 	if (levelDifficulty == EASY)
 	{
-		bananaChance = 100;
+		appleChance = 100;
 
 		fallSpeed = 1;
 		if (Timer_Set == false)
